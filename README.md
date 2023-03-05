@@ -6,7 +6,7 @@ The project is a web application that allows users to read articles about living
 
 Built by 6 students (3 for the frontend / 3 for the backend) of the PHP web and mobile development cursus at the [O'Clock](https://oclock.io/) full remote school, it is our final course project.
 
-I'm the backend lead developer of the ongoing project and this repository presents this part to this day (2021-03-05). To let our fellow React frontenders concentrate on their part, we decided to take care of the backoffice frontend ourselves and to build it in Twig and Bootstrap.
+I'm the backend lead developer of the ongoing project and this repository presents this part to this day (2023-03-05). To let our fellow React frontenders concentrate on their part, we decided to take care of the backoffice frontend ourselves and to build it in Twig and Bootstrap.
 
 I especially work on the following features:
 
