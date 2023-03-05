@@ -20,7 +20,7 @@ I especially work on the following features:
 
 -   User registration (with email confirmation)
 
--   Image upload (with image resizing)
+-   Image upload (with image cropping and resizing)
 
 ![Login page](https://github.com/Laure-Riglet/Laure-Riglet/blob/main/img/Eco-Friendly/Eco-Friendly_login.png?raw=true)
 
