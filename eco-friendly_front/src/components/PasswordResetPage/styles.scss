@@ -1,0 +1,132 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.password-reset {
+  --title-font-size: 1.2rem;
+  --text-font-size: 1rem;
+  --max-width: 20rem;
+  --padding: 0 4rem;
+  --margin-y: 1.125rem;
+  --field-font-size: var(--text-font-size);
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--margin-y);
+
+  &-title {
+    width: 100%;
+    max-width: var(--max-width);
+    font-size: var(--title-font-size);
+    margin: 0 auto 2rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &-text {
+    width: 100%;
+    max-width: var(--max-width);
+    font-size: var(--text-font-size);
+    margin: 0 auto var(--margin-y);
+    text-align: justify;
+    line-height: calc(var(--text-font-size) * 1.5);
+  }
+
+  &-image {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: calc(var(--margin-y) * 2) 4rem calc(var(--margin-y) * 3);
+    border-radius: 2.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 40px;
+    }
+  }
+
+  &-buttons {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .btn:last-child {
+      margin-left: var(--margin-y);
+    }
+  }
+
+  .field-input {
+    font-size: calc(var(--field-font-size) * 1.375);
+  }
+
+  .messages {
+    width: 100%;
+    max-width: var(--max-width);
+    font-size: var(--text-font-size);
+    margin: 0 auto var(--margin-y);
+    line-height: calc(var(--text-font-size) * 1.5);
+  }
+
+  span {
+    color: vars.$primaryColor;
+    font-weight: bold;
+  }
+
+  button {
+    font-size: var(--text-font-size);
+  }
+
+  input {
+    margin-bottom: var(--margin-y);
+  }
+
+  form {
+    width: 100%;
+    text-align: center;
+    max-width: var(--max-width);
+  }
+
+  /* sm: 640px */
+  @include screen(sm) {
+    --padding: 0 4rem;
+    --max-width: 30rem;
+  }
+
+  /* md: 768px */
+  @include screen(md) {
+    --padding: 0 4rem;
+    --max-width: 35rem;
+  }
+
+  /* lg: 1024px */
+  @include screen(lg) {
+    --padding: 0 4rem;
+    --max-width: 40rem;
+  }
+
+  /* xl: 1280px */
+  @include screen(xl) {
+    --title-font-size: 1.8rem;
+    --text-font-size: 1.4rem;
+    --max-width: 45rem;
+    --padding: 0 0;
+  }
+
+  /* 2xl: 1536px */
+  @include screen(2xl) {
+    --title-font-size: 2rem;
+    --text-font-size: 1.5rem;
+    --max-width: 60rem;
+  }
+}

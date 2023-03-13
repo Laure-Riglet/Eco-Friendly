@@ -1,0 +1,103 @@
+@use 'src/styles/vars';
+
+.field {
+  position: relative;
+
+  &-input {
+    --field-bg: #fff;
+    --field-font-size: 1rem;
+    --field-padding-x: 0.75rem;
+    --field-padding-y: 0.375rem;
+    --field-color: inherit;
+    --field-font-weight: 400;
+    --field-border-radius: 0.375rem;
+    --field-border-color: transparent;
+    --field-line-height: 1.5;
+    --field-border-color: #dee2e6;
+
+    display: block;
+    width: 100%;
+    padding: var(--field-padding-y) var(--field-padding-x);
+    font-size: var(--field-font-size);
+    font-weight: var(--field-font-weight);
+    line-height: var(--field-line-height);
+    color: var(--field-color);
+    border-radius: var(--field-border-radius);
+    border: 1px solid var(--field-border-color);
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--field-bg);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      border-color: var(--field-focus-border-color);
+
+      & + .field-label {
+        color: var(--field-label-color);
+      }
+    }
+  }
+
+  &-default {
+    --field-focus-border-color: #a8adb1;
+  }
+
+  // use the default colors in the vars.scss file if they have been defined.
+  &-primary {
+    // --field-focus-border-color: vars.$primaryColor;
+    --field-focus-border-color: #68c1a6;
+  }
+
+  // use the default colors in the vars.scss file if they have been defined.
+  &-secondary {
+    // --field-focus-border-color: vars.$secondaryColor;
+    --field-focus-border-color: #e1b902;
+  }
+
+  &-label {
+    --field-label-color: inherit;
+
+    display: none;
+    position: absolute;
+    top: 0.2rem;
+    left: 0.7rem;
+    color: var(--field-label-color);
+    font-size: 0.7em;
+    text-transform: uppercase;
+    animation: labelSlideUpAndShow 0.3s ease-in-out;
+
+    &-default {
+      --field-label-color: #a8adb1;
+    }
+
+    &-primary {
+      color: vars.$primaryColor;
+    }
+
+    &-secondary {
+      color: vars.$secondaryColor;
+    }
+  }
+
+  &-completed {
+    .field-label {
+      display: block;
+    }
+    .field-input {
+      padding: 1.4em 0.7em 0.4em;
+    }
+  }
+}
+
+@keyframes labelSlideUpAndShow {
+  0% {
+    transform: translateY(1em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0em);
+    opacity: 1;
+  }
+}

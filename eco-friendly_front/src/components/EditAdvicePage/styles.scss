@@ -1,0 +1,114 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.add-advice {
+  --field-bg: #fff;
+  --field-font-size: 1rem;
+  --field-padding-x: 0.75rem;
+  --field-padding-y: 0.375rem;
+  --field-color: #495057;
+  --field-font-weight: 400;
+  --field-border-radius: 0.375rem;
+  --field-border-color: transparent;
+  --field-line-height: 1.5;
+  --field-border-color: #dee2e6;
+  --field-margin-bottom: 1rem;
+
+  font-size: var(--field-font-size);
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: vars.$primaryColor;
+    margin-bottom: var(--field-margin-bottom);
+    text-align: center;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
+  .advice-select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: var(--field-font-weight);
+    color: var(--field-color);
+    margin-bottom: var(--field-margin-bottom);
+    padding: var(--field-padding-y) var(--field-padding-x);
+    line-height: var(--field-line-height);
+    border-radius: var(--field-border-radius);
+    background-color: var(--field-bg);
+    border: 1px solid var(--field-border-color);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  /* Input component default style overrides */
+  .field {
+    color: var(--field-color);
+    margin-bottom: var(--field-margin-bottom);
+
+    & input:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  .text-editor {
+    margin-bottom: var(--field-margin-bottom);
+
+    .ql-toolbar.ql-snow {
+      border-color: var(--field-border-color);
+      border-top-right-radius: var(--field-border-radius);
+      border-top-left-radius: var(--field-border-radius);
+    }
+    .ql-container.ql-snow {
+      border-color: var(--field-border-color);
+      border-bottom-right-radius: var(--field-border-radius);
+      border-bottom-left-radius: var(--field-border-radius);
+    }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    & button {
+      margin-right: 0.5rem;
+    }
+
+    & button:last-child {
+      margin-right: 0;
+    }
+  }
+
+  /* sm: 640px */
+  @include screen(sm) {
+    .button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  /* unused breakpoints  md: 768px */
+
+  /* unused breakpoints lg: 1024px */
+  @include screen(lg) {
+    .row {
+      flex-direction: row-reverse;
+    }
+    .field {
+      flex: 1;
+      margin-right: 1rem;
+    }
+    .advice-select {
+      width: fit-content;
+    }
+  }
+  /* unused breakpoints xl: 1280px */
+  /* unused breakpoints  2xl: 1536px */
+}

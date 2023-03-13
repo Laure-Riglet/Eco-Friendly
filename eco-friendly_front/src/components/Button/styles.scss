@@ -1,0 +1,137 @@
+@use 'src/styles/vars';
+
+.btn {
+  --btn-bg: transparent;
+  --btn-padding-x: 0.75rem;
+  --btn-padding-y: 0.375rem;
+  --btn-font-family: inherit;
+  --btn-font-size: 1rem;
+  --btn-font-weight: 400;
+  --btn-line-height: 1.5;
+  --btn-border-radius: 0.375rem;
+  --btn-border-color: transparent;
+  --btn-hover-border-color: transparent;
+  --btn-color: #fff;
+  --btn-bg: #6c757d;
+  --btn-border-color: #6c757d;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: #5c636a;
+  --btn-hover-border-color: #565e64;
+
+  display: inline-block;
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  line-height: var(--btn-line-height);
+  color: var(--btn-color);
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--btn-border-color);
+  border-radius: var(--btn-border-radius);
+  background-color: var(--btn-bg);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+
+  &:hover {
+    color: var(--btn-hover-color);
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border-color);
+  }
+
+  /* color attribte */
+  &-primary {
+    color: vars.$lightTextColor;
+    background-color: vars.$primaryColor;
+    border-color: vars.$primaryBorderColor;
+
+    &:hover {
+      color: vars.$lightTextColor;
+      background-color: vars.$primaryColorHover;
+      border-color: vars.$primaryColorHover;
+    }
+  }
+
+  &-secondary {
+    color: vars.$lightTextColor;
+    background-color: vars.$secondaryColor;
+    border-color: vars.$secondaryBorderColor;
+
+    &:hover {
+      color: vars.$lightTextColor;
+      background-color: vars.$secondaryColorHover;
+      border-color: vars.$secondaryColorHover;
+    }
+  }
+  /* end color attribte */
+
+  /* style attribute */
+  &-outline-primary {
+    color: vars.$textColorPrimary;
+    background-color: vars.$whiteColor;
+    border-color: vars.$primaryBorderColor;
+
+    &:hover {
+      color: vars.$lightTextColor;
+      background-color: vars.$primaryColor;
+      border-color: vars.$primaryBorderColor;
+    }
+  }
+
+  &-outline-secondary {
+    color: vars.$textColorSecondary;
+    background-color: vars.$whiteColor;
+    border-color: vars.$secondaryBorderColor;
+
+    &:hover {
+      color: vars.$lightTextColor;
+      background-color: vars.$secondaryColor;
+      border-color: vars.$secondaryBorderColor;
+    }
+  }
+
+  &-link-primary,
+  &-link-secondary {
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  &-link-primary {
+    color: vars.$textColorPrimary;
+
+    &:hover {
+      color: vars.$primaryColorHover;
+    }
+  }
+
+  &-link-secondary {
+    color: vars.$textColorSecondary;
+
+    &:hover {
+      color: vars.$secondaryColorHover;
+    }
+  }
+  /* end style attribute */
+
+  /* size attribute */
+  &-lg {
+    padding: calc(var(--btn-padding-y) + 0.125rem)
+      calc(var(--btn-padding-x) + 0.25rem);
+    font-size: calc(var(--btn-font-size + 0.25rem));
+  }
+
+  &-sm {
+    padding: calc(var(--btn-padding-y) - 0.125rem)
+      calc(var(--btn-padding-x) - 0.25rem);
+    font-size: calc(var(--btn-font-size - 0.125rem));
+  }
+  /* end size attribute */
+}

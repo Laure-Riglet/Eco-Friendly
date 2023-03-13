@@ -1,0 +1,173 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.navbar {
+  border-radius: 0% 0% 10% 10%;
+  box-shadow: 0px 10px 5px 3px vars.$shadowColorLight;
+  background: vars.$backgroundGradient;
+
+  &-top {
+    display: flex;
+    justify-content: center;
+
+    // empty span, trick to use flexbox
+    .empty {
+      display: none;
+      opacity: 0;
+      width: 50vh;
+    }
+
+    .navbar-logo {
+      width: 10rem;
+      margin: 1.2rem 0 1.5rem 0;
+    }
+
+    .login-message {
+      display: none;
+    }
+
+    .login-avatar {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      top: 80px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  // RESPONSIVE lg + 1024px ===================================================
+  @include screen(md) {
+    display: flex;
+    flex-direction: column;
+
+    // pour fix la navbar au top de l'écran, rajouter margin a la Page
+    // position: fixed;
+    //ou
+    // top: 0;
+    // Ou essayer sticky, mais ne marche pas ??
+
+    .navbar-top {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+
+      // empty span, tricks to use flexbox
+      .empty {
+        display: block;
+      }
+
+      .navbar-logo {
+        width: 16vw;
+        margin: 1rem;
+      }
+
+      .login {
+        display: flex;
+        align-items: center;
+        align-self: flex-start;
+        justify-content: flex-end;
+        margin: 1rem 1rem 0 0;
+
+        width: 46vh;
+
+        &-message {
+          display: flex;
+          margin-right: 10px;
+        }
+
+        &-avatar {
+          position: static;
+        }
+      }
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+
+      &-buttons {
+        display: flex;
+        justify-content: space-evenly;
+
+        width: 80%;
+        margin: 1rem 1rem 1rem;
+
+        .button {
+          background-color: vars.$whiteColor;
+          padding: 0.35rem 2rem;
+          margin: 0 0.8rem 1rem;
+          border-radius: 30px;
+          box-shadow: 0px 2px 5px 3px vars.$shadowColorLight;
+
+          font-size: medium;
+          font-weight: 700;
+          color: vars.$primaryColorDark;
+        }
+
+        .button:hover {
+          background-color: vars.$primaryColorDark;
+          color: vars.$whiteColor;
+        }
+      }
+
+      .active {
+        background-color: vars.$primaryColorDark;
+        color: vars.$whiteColor;
+      }
+    }
+  }
+
+  // RESPONSIVE lg + 1024px =======================================================
+  @include screen(lg) {
+    .navigation {
+      &-buttons {
+        .button {
+          padding: 0.35rem 3.5rem;
+        }
+      }
+
+      .active {
+        background-color: vars.$primaryColorDark;
+        color: vars.$whiteColor;
+      }
+    }
+  }
+
+  // RESPONSIVE lg + 1024px =======================================================
+  @include screen(lg) {
+    .navigation {
+      &-buttons {
+        .button {
+          padding: 0.35rem 3.5rem;
+        }
+      }
+
+      .active {
+        background-color: vars.$primaryColorDark;
+        color: vars.$whiteColor;
+      }
+    }
+  }
+
+  // RESPONSIVE lg + 1024px =======================================================
+  @include screen(lg) {
+    .navigation {
+      &-buttons {
+        .button {
+          padding: 0.35rem 3.5rem;
+        }
+      }
+    }
+  }
+}

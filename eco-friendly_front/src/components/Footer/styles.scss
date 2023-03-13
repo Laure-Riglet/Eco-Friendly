@@ -1,0 +1,64 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins';
+
+.footer {
+  --logo-size: 1.4rem;
+  --default-font-size: 0.8rem;
+  --default-margin-bottom: 0.4rem;
+
+  width: 100%;
+  padding: 0.7rem 2rem;
+  font-size: var(--default-font-size);
+  color: vars.$primaryColorDark;
+  background: vars.$backgroundGradientUpsideDown;
+  border-radius: 10% 10% 0% 0%;
+  box-shadow: 0px -5px 10px 3px vars.$shadowColorLight;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .legals {
+    display: inline-block;
+    margin-bottom: var(--default-margin-bottom);
+
+    a {
+      &:hover {
+        color: vars.$primaryColorHover;
+      }
+    }
+  }
+
+  .copyright {
+    margin-bottom: var(--default-margin-bottom);
+  }
+
+  .social {
+    a {
+      img {
+        height: var(--logo-size);
+        width: var(--logo-size);
+      }
+
+      :hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  a {
+    margin-right: 0.5rem;
+    transition: color 0.3s ease-in-out, scale 0.3s ease-in-out;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @include screen(sm) {
+    --default-margin-bottom: 0;
+
+    flex-direction: row;
+  }
+}

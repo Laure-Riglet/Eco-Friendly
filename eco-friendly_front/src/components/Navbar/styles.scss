@@ -1,0 +1,272 @@
+@use 'src/styles/vars';
+@use 'sass:color';
+@import '../../styles/mixins.scss';
+
+.navbar {
+  --logo-size: 4.5rem; /* when you change this, the avatar size is changed in the burger component */
+  --navbar-padding-x: 1rem;
+  --navbar-padding-y: 0.325rem;
+  --navbar-color: #fff; /* when you change this, the color is changed in the burger component */
+  --navbar-height: 76px;
+  --brand-font-size: 1rem;
+  --nav-link-padding-x: 0.5rem;
+  --navbar-transition: 0.4s ease-in-out; /* when you change this, the transition is changed in the burger component */
+
+  position: relative;
+  padding: var(--navbar-padding-y) var(--navbar-padding-x);
+  color: var(--navbar-color);
+  background: vars.$backgroundGradient;
+  border-radius: 0% 0% 10% 10%;
+  box-shadow: 0px 10px 10px 3px vars.$shadowColorLight;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 900; /* important */
+
+  &-container {
+    --gutter-x: 1rem;
+
+    width: 100%;
+    margin: 0 var(--gutter-x);
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-brand {
+    font-size: var(--brand-font-size);
+    color: var(--brand-color);
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: var(--navbar-height);
+    flex-grow: 1;
+
+    a {
+      vertical-align: middle;
+      display: inline-block;
+      height: var(--logo-size);
+
+      img {
+        margin-right: 0.325rem;
+        width: var(--logo-size);
+        height: var(--logo-size);
+        object-fit: cover;
+        padding-bottom: 10px;
+      }
+    }
+
+    span {
+      padding-left: 1.8rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: vars.$primaryColorDark;
+    }
+  }
+
+  /* sm: 640 */
+  @include screen(sm) {
+    span {
+      padding-left: 0.7rem;
+    }
+  }
+
+  /* md: 768 */
+  @include screen(md) {
+    --logo-size: 72px;
+
+    .navbar-brand {
+      flex-grow: 0;
+
+      span {
+        display: none;
+      }
+    }
+    .navbar-burger {
+      display: none;
+    }
+
+    .menu {
+      flex-basis: auto;
+      &-collapse {
+        display: block;
+      }
+
+      &-items {
+        margin: 1rem 0;
+        padding: 0;
+        flex-direction: row;
+        justify-content: flex-end;
+        border-top: none;
+        flex-grow: 1;
+      }
+
+      &-item {
+        padding-bottom: 0;
+        display: inline-block;
+        margin-left: 0.5rem;
+
+        // a {
+        //   background-color: white;
+        //   border-radius: 20px;
+        //   margin: 0.2rem;
+        //   padding: 0.5rem 1rem 0.4rem;
+        // }
+
+        button {
+          padding: 0.4rem 0.625rem 0.35rem;
+          max-width: 7.5rem;
+          border-radius: 0.325rem;
+          border: 2px solid #fff;
+          background: transparent;
+        }
+
+        &.dropdown {
+          position: relative;
+
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+      .dropdown-menu.show {
+        position: absolute;
+        right: 0;
+        padding: 1rem 0;
+        margin: 0.5rem 0 0;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.325rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 900; /* important */
+
+        img {
+          display: inline-block;
+          width: var(--logo-size);
+          height: var(--logo-size);
+          margin-bottom: 1rem;
+          border-radius: 500%;
+          object-fit: cover;
+        }
+
+        .menu-item.account {
+          margin: 0;
+          a {
+            color: vars.$whiteColor;
+            text-align: center;
+            border-radius: 5px;
+            background: vars.$primaryColor;
+            border: 0.2rem solid vars.$primaryColor;
+            margin: 0;
+            padding: 1rem;
+
+            &:hover {
+              background-color: vars.$whiteColor;
+              color: vars.$primaryColorDark;
+            }
+          }
+        }
+
+        .menu-item {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          color: #212529;
+          font-weight: bold;
+          text-align: center;
+          text-shadow: none;
+          background-color: transparent;
+          text-decoration: none;
+          margin: 0;
+
+          button {
+            color: vars.$secondaryColor;
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+
+            &:hover {
+              color: vars.$secondaryColorDark;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* unused breakpoints md: 1024px */
+  @include screen(lg) {
+    --logo-size: 96px;
+
+    &-container {
+      flex-direction: column;
+    }
+
+    .menu {
+      position: relative;
+
+      &-collapse {
+        display: flex;
+        width: 100%;
+
+        .menu-items {
+          justify-content: center;
+          margin-bottom: 1.5rem;
+
+          .menu-item:last-child {
+            // margin-left: auto;
+          }
+
+          .menu-item:first-child {
+            margin-left: auto;
+          }
+        }
+      }
+
+      .menu-item {
+        margin-left: 2rem;
+      }
+
+      .dropdown-menu.show {
+        top: 6rem;
+      }
+    }
+  }
+
+  /* md: 1280px */
+  @include screen(xl) {
+    --logo-size: 124px;
+    .menu {
+      .menu-item,
+      .menu-item button {
+        font-size: 1.4rem;
+        max-width: 12.5rem;
+      }
+
+      .dropdown-menu.show {
+        padding: 1.5rem;
+        .menu-item.account {
+          padding: 0.5rem 0;
+        }
+      }
+    }
+  }
+
+  /* unused breakpoints md: 1536px */
+  @include screen(2xl) {
+    --logo-size: 150px;
+    .menu-item,
+    .menu-item {
+      button {
+        font-size: 1.4rem;
+        margin-left: 2.5rem;
+        max-width: 13rem;
+      }
+    }
+  }
+}

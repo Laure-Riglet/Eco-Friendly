@@ -1,0 +1,71 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.advices {
+  border-top: 0.1rem solid vars.$secondaryBorderColor;
+  border-bottom: 0.1rem solid vars.$secondaryBorderColor;
+
+  &-sentence {
+    font-size: large;
+    font-weight: 800;
+    color: vars.$darkColor;
+    margin-top: 1rem;
+  }
+
+  &-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+  }
+}
+
+.advice-card {
+  width: 100%;
+  .card {
+    margin: 1rem 1rem 2rem 0rem;
+    width: 10rem;
+    height: 6rem;
+
+    .summary {
+      display: none;
+    }
+  }
+
+  // RESPONSIVE LG +1024 =======================================================
+  @include screen(md) {
+    .advices {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      border: 0.1rem solid vars.$secondaryBorderColor;
+      padding: 0 1rem;
+
+      &-sentence {
+        text-align: center;
+        font-size: large;
+        padding: 0.7rem;
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .advice-card {
+      display: flex;
+      justify-content: center;
+
+      .card {
+        width: 17rem;
+        height: 9rem;
+        margin: 1rem 1rem 2rem;
+
+        .summary {
+          display: block;
+        }
+      }
+    }
+  }
+}

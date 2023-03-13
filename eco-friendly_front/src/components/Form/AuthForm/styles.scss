@@ -1,0 +1,35 @@
+@use 'src/styles/vars';
+
+.connexion,
+.inscription {
+  --margin-default: 1.125rem;
+
+  .title {
+    margin-bottom: var(--margin-default);
+    text-align: left;
+    font-weight: bold;
+  }
+
+  input {
+    margin-bottom: var(--margin-default);
+  }
+
+  button[type='submit'] {
+    margin-bottom: var(--margin-default);
+  }
+
+  .link {
+    span {
+      color: vars.$textColorPrimary;
+    }
+
+    span:hover {
+      color: vars.$primaryColorHover;
+    }
+  }
+}
+
+.inscription hr {
+  margin-top: var(--margin-default);
+  margin-bottom: var(--margin-default);
+}

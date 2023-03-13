@@ -1,0 +1,40 @@
+@use 'src/styles/vars';
+@use 'sass:color';
+@import '../../../styles/mixins.scss';
+
+.navbar {
+  --burger-icon-size: 1.5em;
+  --burger-avatar-size: calc(var(--logo-size) - 1rem);
+  --burger-color: var(--navbar-color);
+  --burger-padding-y: 0.25rem;
+  --burger-padding-x: 0.75rem;
+  --burger-font-size: 1.25rem;
+  --burger-border-radius: 0.375rem;
+  --burger-transition: var(--navbar-transition);
+
+  &-burger {
+    padding: var(--burger-padding-y) var(--burger-padding-x);
+    font-size: var(--burger-font-size);
+    line-height: 1;
+    color: var(--burger-color);
+    background-color: transparent;
+    border: var(--border-width) solid var(--burger-border-color);
+    border-radius: var(--burger-border-radius);
+    transition: var(--burger-transition);
+
+    &-icon {
+      display: inline-block;
+      width: var(--burger-icon-size);
+      height: var(--burger-icon-size);
+      vertical-align: middle;
+    }
+
+    &-user-icon {
+      display: inline-block;
+      width: var(--burger-avatar-size);
+      height: var(--burger-avatar-size);
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@use 'sass:color';
+
+// BASIC COLOR
+$whiteColor: #fff;
+$darkColor: #000;
+$lightColor: #fff9ee;
+$darkGrayColor: #343a40;
+
+// PRIMARY COLOR BLUE
+$primaryColor: #68c1a6;
+$primaryColorLight: #caf2e6;
+$primaryColorDark: #427968;
+// $primaryColorLight: color.scale($primaryColor, $lightness: 60%);
+// $primaryColorDark: color.scale($primaryColor, $lightness: -60%);
+
+$primaryBorderColor: $primaryColor;
+$primaryColorHover: $primaryColorDark;
+$primaryColorFocus: $primaryColor;
+
+// SECONDARY COLOR YELLOW
+$secondaryColor: #e1b902;
+$secondaryColorLight: #fff2b6;
+$secondaryColorDark: #de8201;
+// $secondaryColorLight: color.scale($secondaryColor, $lightness: 60%);
+// $secondaryColorDark: color.scale($secondaryColor, $lightness: -60%);
+
+$secondaryBorderColor: $secondaryColor;
+$secondaryColorHover: $secondaryColorDark;
+$secondaryColorFocus: $secondaryColor;
+
+// OTHER COLOR
+$shadowColorLight: #062a2421;
+$shadowColorLighter: #3c6d5e15;
+
+$lightTextColor: $lightColor;
+$darkTextColor: $darkGrayColor;
+$textColorPrimary: $primaryColor;
+$textColorSecondary: $secondaryColor;
+
+$dangerColor: $secondaryColorDark;
+$dangerColorAlt: color.scale($dangerColor, $lightness: 60%);
+
+$successColor: #96b31e;
+$successColorAlt: color.scale($successColor, $lightness: 60%);
+
+$backgroundGradient: linear-gradient(
+  7deg,
+  rgba(240, 249, 145, 0.196516106442577) 0%,
+  rgba(136, 228, 205, 0.8127626050420168) 6%,
+  rgba(123, 219, 190, 0.700717787114846) 38%,
+  rgba(136, 228, 205, 0.8715861344537815) 71%,
+  rgba(175, 224, 154, 0.7175245098039216) 88%,
+  rgba(240, 249, 145, 0.5102415966386555) 99%
+);
+
+$backgroundGradientUpsideDown: linear-gradient(
+  184deg,
+  rgba(240, 249, 145, 0.196516106442577) 0%,
+  rgba(136, 228, 205, 0.8127626050420168) 6%,
+  rgba(123, 219, 190, 0.700717787114846) 38%,
+  rgba(136, 228, 205, 0.8715861344537815) 71%,
+  rgba(175, 224, 154, 0.7175245098039216) 88%,
+  rgba(240, 249, 145, 0.5102415966386555) 99%
+);

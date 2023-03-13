@@ -1,0 +1,162 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.advice-page {
+  .advice {
+    &-elements {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      margin: 1rem 0;
+
+      &-top {
+        width: 100%;
+
+        .advice-category {
+          font-size: x-large;
+          font-weight: 900;
+          color: vars.$primaryColorDark;
+          margin: 1.5rem 0 3rem;
+        }
+
+        .advice-title {
+          font-size: x-large;
+          font-weight: 900;
+          color: vars.$primaryColorDark;
+          margin: 1.5rem 0 0.2rem;
+        }
+
+        .advice-title-container { 
+          border: 0.1rem solid vars.$primaryBorderColor;
+          border-radius: 3rem;
+          padding: 0.5rem 1rem;
+          margin: 0.5rem 0;
+          
+        }
+
+        .advice-author {
+          font-size: medium;
+          color: vars.$darkColor;
+          margin-right: 0.5rem;
+        }
+
+        .advice-date {
+          font-size: medium;
+          color: vars.$darkColor;
+        }
+
+        .advice-user {
+          
+          display: flex;
+          align-items: center;
+          margin: 0.5rem 0;
+          img {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+
+      .advice-content {
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+      }
+
+      &-text {
+        font-size: medium;
+        color: vars.$darkColor;
+        margin: 1.5rem 1rem;
+      }
+    }
+  }
+
+  .advices {
+    border-top: 0.1rem solid vars.$secondaryBorderColor;
+    border-bottom: 0.1rem solid vars.$secondaryBorderColor;
+
+    &-sentence {
+      font-size: large;
+      font-weight: 800;
+      color: vars.$darkColor;
+      margin-top: 1rem;
+    }
+
+    &-list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      overflow-x: scroll;
+    }
+  }
+
+  .advice-card {
+    width: 100%;
+    .card {
+      margin: 1rem 1rem 2rem 0rem;
+      width: 10rem;
+      height: 6rem;
+
+      .summary {
+        display: none;
+      }
+    }
+  }
+
+  // RESPONSIVE mdr +760 =======================================================
+  @include screen(md) {
+    display: flex;
+
+    // Element 1 : articles
+    .advice {
+      &-elements {
+        &-top {
+          // padding-bottom: 1rem;
+          margin-top: 2rem;
+        }
+        &-text {
+          margin: 1.5rem;
+        }
+      }
+    }
+
+    // Element 2 : advices
+    .advices {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      border: 0.1rem solid vars.$secondaryBorderColor;
+      padding: 0 1rem;
+      margin: 1rem 0 0 1rem; // added for ArticlePAge
+
+      &-sentence {
+        text-align: center;
+        font-size: large;
+        padding: 0.7rem;
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .advice-card {
+      display: flex;
+      justify-content: center;
+
+      .card {
+        width: 17rem;
+        height: 9rem;
+        margin: 1rem 1rem 2rem;
+
+        .summary {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.app {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,35 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.main {
+  --gutter-x: 1rem;
+  --gutter-y: 2rem;
+
+  flex: 1 1 auto;
+  margin: var(--gutter-y) var(--gutter-x);
+
+  /* sm: 640px */
+  @include screen(sm) {
+    margin: var(--gutter-y) calc(var(--gutter-x) * 2);
+  }
+
+  /* md: 768px */
+  @include screen(md) {
+    margin: var(--gutter-y) calc(var(--gutter-x) * 2);
+  }
+
+  /* md: 1024px */
+  @include screen(lg) {
+    margin: var(--gutter-y) calc(var(--gutter-x) * 8);
+  }
+
+  /* md: 1280px */
+  @include screen(xl) {
+    margin: var(--gutter-y) calc(var(--gutter-x) * 16);
+  }
+
+  /* md: 1536px */
+  @include screen(2xl) {
+    margin: var(--gutter-y) calc(var(--gutter-x) * 16);
+  }
+}

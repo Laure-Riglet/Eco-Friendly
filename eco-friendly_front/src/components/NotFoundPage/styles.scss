@@ -1,0 +1,48 @@
+@import 'src/styles/_vars.scss';
+@import '../../styles/mixins.scss';
+
+.not-found {
+  --font-size: 2rem;
+  --margin: 0 var(--font-size);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--margin);
+
+  img {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: var(--font-size);
+    font-weight: bolder;
+    color: $primaryColor;
+  }
+
+  /* sm: 640px */
+  @include screen(sm) {
+    --font-size: 3rem;
+  }
+  /* unused breakpoints md: 768px */
+
+  /* lg: 1024px */
+  @include screen(lg) {
+    --font-size: 4rem;
+    img {
+      width: 70%;
+    }
+  }
+
+  /* unused breakpoints xl: 1280px */
+
+  /* 2xl: 1536px */
+  @include screen(2xl) {
+    --font-size: 5rem;
+    img {
+      width: 40%;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@use 'src/styles/vars';
+@import '../../styles/mixins.scss';
+
+.legal {
+  --font-size: 1rem;
+
+  margin: 2rem var(--gutter-y);
+  color: inherit;
+
+  &-title {
+    font-size: calc(var(--font-size) * 1.125);
+    text-transform: uppercase;
+    margin: 1rem;
+    color: vars.$textColorPrimary;
+  }
+
+  &-text {
+    font-size: calc(var(--font-size));
+    padding: 0 -0.5rem;
+    color: inherit;
+    text-align: justify;
+
+    strong {
+      color: vars.$textColorSecondary;
+      font-weight: bold;
+    }
+  }
+
+  @include screen('sm') {
+    --font-size: 1.125rem;
+  }
+
+  @include screen('md') {
+    --font-size: 1.125rem;
+  }
+
+  @include screen('lg') {
+    --font-size: 1.125rem;
+  }
+
+  @include screen('xl') {
+    --font-size: 1.125rem;
+  }
+
+  @include screen('2xl') {
+    --font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,27 @@
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+);
+
+/** Responsive management according to breakpoints
+* $prefix: sm, md, lg, xl, 2xl
+* usage:
+*   import mixins.scss into the main style file with the command:
+*   @import 'mixins.scss';
+*
+*   include the screen mixin with a correct parameter in your selector
+*   and define its specific rules inside:
+*
+*   @include screen(sm) {
+*       // your rules here
+*     }
+*/
+
+@mixin screen($prefix) {
+  @media screen and (min-width: map-get($breakpoints, $prefix)) {
+    @content;
+  }
+}
