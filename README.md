@@ -1,6 +1,4 @@
-# Eco-Friendly
-
-Work in progress.
+# Eco-Friendly - Backend
 
 The project is a web application that allows users to read articles about living an eco-friendlier lifestyle and to share their own tips. The application is built in PHP with the Symfony framework and uses a MariaDB database.
 
@@ -22,19 +20,13 @@ I especially worked on the following features:
 
 -   Image upload (with image cropping and resizing)
 
-![Login page](https://github.com/Laure-Riglet/Laure-Riglet/blob/main/img/Eco-Friendly/Eco-Friendly_login.png?raw=true)
+As the project I will be using as support for the web and mobile developer certification (BTEC Higher National Diploma equivalent), it will still be improved until the end of April 2023. The changes will be operated on the `develop` branch and deployment on the `prod` one.
 
-![Home page](https://github.com/Laure-Riglet/Laure-Riglet/blob/main/img/Eco-Friendly/Eco-Friendly_home.png?raw=true)
+## What are the requirements?
 
-## Installation
+PHP 7.4.3 (minimum)
 
-### Requirements
-
-[PHP 7.4.3](https://www.php.net/) (minimum)
-
-[Composer 2.0.11](https://getcomposer.org/) (minimum)
-
-### How to install the project?
+## How to install the project?
 
 1. Clone project
 
@@ -76,8 +68,20 @@ I especially worked on the following features:
 
     `php bin/console doctrine:fixtures:load`
 
-## What command can I use for in project?
+## What command can I use?
 
 1. Start a development server
 
     From the project's root: `php -S 0.0.0.0:8000 -t public`
+
+2. Remove unverified users
+    
+    `php bin/console app:remove-unverified-users --days=7`
+
+3. Replace broken avatars' links
+   
+    `php bin/console app:fix-broken-avatar`
+
+4. Replace broken articles' illustration images links
+   
+    `php bin/console app:fix-broken-picture`
