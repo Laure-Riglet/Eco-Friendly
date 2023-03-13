@@ -31,18 +31,21 @@
                 </button>
                 <div class="collapse navbar-collapse mx-auto" id="navbarNavAltMarkup">
                     <div class="navbar-nav ms-auto">
+                    {% if app.user.isVerified %}
+                            
+                        {% set pathinfo = app.request.pathinfo %}
                         <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_home'))%} active{% endif %}" 
                         href="{{ path('app_backoffice_home') }}">Accueil</a>
                         {% if "ROLE_ADMIN" in app.user.roles %}
-                        <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_members_list'))%} active{% endif %}" 
-                        href="{{ path('app_backoffice_members_list') }}">Membres</a>
-                        <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_authors_list'))%} active{% endif %}" 
-                            href="{{ path('app_backoffice_authors_list') }}">Auteurs</a>
-                        <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_articles_list'))%} active{% endif %}" 
-                            href="{{ path('app_backoffice_articles_list') }}">Articles</a>
-                        <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_advices_list'))%} active{% endif %}" 
+                        <a class="d-flex justify-content-center align-items-center nav-link{% if ('membres' in pathinfo) or (user is defined and 'ROLE_USER' in user.roles and 'ROLE_AUTHOR' not in user.roles) and ('home' not in pathinfo) %} active{% endif %}" 
+                            href="{{ path('app_backoffice_members_list') }}">Membres</a>
+                        <a class="d-flex justify-content-center align-items-center nav-link{%  if 'conseils' in pathinfo %} active{% endif %}" 
                             href="{{ path('app_backoffice_advices_list') }}">Conseils</a>
-                        <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_categories_list'))%} active{% endif %}" 
+                        <a class="d-flex justify-content-center align-items-center nav-link{% if ('auteurs' in pathinfo) or (user is defined and 'ROLE_AUTHOR' in user.roles) %} active{% endif %}"
+                            href="{{ path('app_backoffice_authors_list') }}">Auteurs</a>
+                        <a class="d-flex justify-content-center align-items-center nav-link{% if 'articles' in pathinfo %} active{% endif %}" 
+                            href="{{ path('app_backoffice_articles_list') }}">Articles</a>
+                        <a class="d-flex justify-content-center align-items-center nav-link{% if 'categories' in pathinfo %} active{% endif %}" 
                             href="{{ path('app_backoffice_categories_list') }}">Cat&eacute;gories</a>
                         <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_avatars_list'))%} active{% endif %}" 
                             href="{{ path('app_backoffice_avatars_list') }}">Avatars</a>
@@ -52,7 +55,10 @@
                         <a class="d-flex justify-content-center align-items-center nav-link{% if app.request.pathinfo is same as (path('app_backoffice_articles_new'))%} active{% endif %}" 
                             href="{{ path('app_backoffice_articles_new') }}">&Eacute;crire un article</a>
                         {% endif %}
-                        <div class="d-flex justify-content-center align-items-center" style="margin: 0 25px;">
+                    
+                    {% endif %}
+                    
+                        <div class="d-flex justify-content-center align-items-center nav-link" style="margin: 0 25px">
                             <img  class="d-flex align-self-center" src="{{ app.user.avatar }}" style="height: 32px; width: 32px; border-radius: 50%; margin-right: 10px;" />
                             <span class="d-flex justify-content-center align-items-center fw-semibold text-primary text-center">{{ app.user.firstname }} {{app.user.lastname}}</span>
                         </div>

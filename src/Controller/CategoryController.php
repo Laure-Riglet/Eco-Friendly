@@ -39,12 +39,14 @@ class CategoryController extends AbstractController
             $category->setSlug($slugger->slugify($category->getName()));
             $categoryRepository->add($category, true);
 
+            $this->addFlash(
+                'success',
+                'La catégorie "' . $category->getName() . '" a bien été ajoutée'
+            );
+
             return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash(
-            'success',
-            'La catégorie ' . $category->getName() . ' ' .  ' a bien été ajoutée'
-        );
+
         return $this->renderForm('category/new.html.twig', [
             'category' => $category,
             'form' => $form,
@@ -72,16 +74,16 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $category->setSlug($slugger->slugify($category->getName()));
+            $category->setUpdatedAt(new DateTimeImmutable());
             $categoryRepository->add($category, true);
+            $this->addFlash(
+                'success',
+                'La catégorie "' . $category->getName() . '" a bien été modifiée'
+            );
 
             return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        $this->addFlash(
-            'success',
-            'La catégorie ' . $category->getName() . ' ' .  ' a bien été modifiée'
-        );
-        
         return $this->renderForm('category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
@@ -89,19 +91,40 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}", name="app_backoffice_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/categories/{id}/desactiver", name="app_backoffice_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+    
      */
     public function deactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
         if ($this->isCsrfTokenValid('deactivate' . $category->getId(), $request->request->get('_token'))) {
             $category->setIsActive(false);
+            $category->setUpdatedAt(new DateTimeImmutable());
             $categoryRepository->add($category, true);
         }
 
         $this->addFlash(
             'danger',
-            'La catégorie ' . $category->getName() . ' ' .  ' a bien été désactivée'
+            'La catégorie "' . $category->getName() . '" a bien été désactivée.'
         );
+        return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/back_office/categories/{id}/reactiver", name="app_backoffice_categories_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     
+     */
+    public function reactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    {
+        if ($this->isCsrfTokenValid('reactivate' . $category->getId(), $request->request->get('_token'))) {
+            $category->setIsActive(true);
+            $category->setUpdatedAt(new DateTimeImmutable());
+            $categoryRepository->add($category, true);
+        }
+        $this->addFlash(
+            'success',
+            'La catégorie "' . $category->getName() . '" a bien été réactivée.'
+        );
+
         return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
     }
 }

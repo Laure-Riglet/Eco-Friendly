@@ -29,8 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Length(min = 6, max = 180)
-     * @Assert\Email(mode = "strict")
+     * @Assert\Email(mode = "strict", message="L’email est invalide.")
      * @Assert\NotBlank
      * @Groups({"articles"})
      * @Groups({"advices"})
@@ -41,9 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Length(min = 8, max = 32)
-     * @Assert\Regex(pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/")
-     * @Assert\NotBlank 
+     * @Assert\Regex(pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).{8,32}$/", groups={"registration"}, message="Le mot de passe doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial")
+     * @Assert\NotBlank(groups={"registration"}) 
      */
     private $password;
 
@@ -60,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Length(max = 64)
      * starts with a capital letter & contains only letters, hyphens and apostrophes
-     * @Assert\Regex(pattern="/^[A-Z][A-Za-z\-\']+$/")
+     * @Assert\Regex(pattern="/^[A-Za-zàâçéèêëîïôûùüÿñæœ\s\-\']*$/", message="Le prénom ne peut contenir que des lettres, des apostrophes, des tirets et des espaces")
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
@@ -71,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Length(max = 64)
      * starts with a capital letter & contains only letters, hyphens and apostrophes
-     * @Assert\Regex(pattern="/^[A-Z][A-Za-z\-\']+$/")
+     * @Assert\Regex(pattern="/^[A-Za-zàâçéèêëîïôûùüÿñæœ\s\-\']*$/", message="Le nom ne peut contenir que des lettres, des apostrophes, des tirets et des espaces")
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
@@ -81,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=64)
      * @Assert\Length(min = 3, max = 64)
-     * @Assert\Regex(pattern="/^[^\#]+$/")
+     * @Assert\Regex(pattern="/^[^\#\s]+$/", message="Votre pseudo ne peut pas contenir d'espace ou de #")
      * @Assert\NotBlank
      * @Groups({"articles"})
      * @Groups({"advices"})
@@ -100,9 +98,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Assert\Length(max = 255)
      * @Assert\Url
+     * @Assert\NotBlank
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})

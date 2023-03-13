@@ -2,7 +2,7 @@
         <div class="card-header d-flex align-items-center">
             <img class="d-flex align-self-left" src="{{ user.avatar }}" style="height: 48px; width: 48px; border-radius: 50%; margin-right: 10px;" />
             <h6 class="card-title m-0">{{ user.nickname }}</h6>
-            <h7 class="card-subtitle m-0 text-muted">#{{ user.id }}</h7>
+            <h7 class="card-subtitle m-0 text-muted">{{ user.code }}</h7>
         </div>
         <div class="card-body">
             <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
@@ -19,7 +19,7 @@
             </p>
             <p class="card-text">
                 Status : 
-                {% include "_fragments/_user_verified_tag.html.twig" with {status:user.isActive} %}
+                {% include "_fragments/_user_verified_tag.html.twig" with {status:user.isVerified} %}
                 {% include "_fragments/_user_active_tag.html.twig" with {status:user.isActive} %}
             </p>
             <p class="card-text">Inscription : {{ user.createdAt|date('d-m-Y H:i:s') }}</p>
@@ -29,17 +29,14 @@
             {% else %}
             <p class="card-text">Nombre de conseils : {{ user.advices|length }}</p>
             {% endif %}
-            {% if "ROLE_ADMIN" in app.user.roles %}
             <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">
-                {% if "ROLE_AUTHOR" in app.user.roles %}
+                {% if 'ROLE_AUTHOR' in user.roles or 'ROLE_ADMIN' in user.roles %}
                 <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('app_backoffice_users_edit', {'id': user.id}) }}"><i class="bi bi-pencil"></i></a>
                 {% endif %}
-                <form method="post" action="{{ path('app_backoffice_users_deactivate', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver cet utilisateur ?');">
-                    <input type="hidden" name="_token" value="{{ csrf_token('deactivate' ~ user.id) }}" />
-                    <button class="m-1 btn-sm btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="D&eacute;sactiver"><i class="bi bi-x-circle"></i></button>
-                </form>
+                {% if is_granted('ROLE_ADMIN') and not app.user is same as user %}
+                {% include "_fragments/_button_activate_user.html.twig"%}
+                {% endif %}
             </div>
-            {% endif %}
         </div>
         <div class="card-footer bg-transparent">
             <div class="float-right text-muted small">Mis à jour : {{ user.updatedAt ? user.updatedAt|date('d-m-Y H:i:s') : 'jamais' }}</div>

@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Advice;
 use App\Form\AdviceType;
+use App\Form\ContentListType;
 use App\Repository\AdviceRepository;
 use App\Service\SluggerService;
+use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,13 +19,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdviceController extends AbstractController
 {
     /**
-     * @Route("/back_office/conseils", name="app_backoffice_advices_list", methods={"GET"})
+     * @Route("/back_office/conseils", name="app_backoffice_advices_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
-    public function list(AdviceRepository $adviceRepository): Response
+    public function list(Request $request, AdviceRepository $adviceRepository): Response
     {
-        return $this->render('advice/list.html.twig', [
-            'advices' => $adviceRepository->findAll(),
+        $advices = $adviceRepository->findAllOrderByDate();
+
+        $form = $this->createForm(ContentListType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $advices = $adviceRepository->findAllWithFilter(
+                $form->get('sortType')->getData() ?? 'created_at',
+                $form->get('sortOrder')->getData() ?? 'DESC',
+                $form->get('title')->getData(),
+                $form->get('content')->getData(),
+                $form->get('status')->getData(),
+                $form->get('user')->getData(),
+                $form->get('category')->getData(),
+                DateTimeImmutable::createFromMutable($form->get('dateFrom')->getData() ?? new DateTime('2000-01-01')),
+                DateTimeImmutable::createFromMutable($form->get('dateTo')->getData() ?? new DateTime('now'))
+            );
+
+            return $this->render('advice/list.html.twig', [
+                'advices' => $advices,
+                'form' => $form->createView()
+            ]);
+        }
+
+        return $this->renderForm('advice/list.html.twig', [
+            'advices' => $advices,
+            'form' => $form
         ]);
     }
 
@@ -52,12 +79,15 @@ class AdviceController extends AbstractController
             $advice->setUpdatedAt(new DateTimeImmutable());
             $adviceRepository->add($advice, true);
 
+            $this->addFlash(
+                'success',
+                '"' . $advice->getTitle() . '" a bien été modifié.'
+            );
+
             return $this->redirectToRoute('app_backoffice_advices_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash(
-            'success',
-            $advice->getTitle() . ' ' .  ' a bien été modifié. '
-        );
+
+
         return $this->renderForm('advice/edit.html.twig', [
             'advice' => $advice,
             'form' => $form,
@@ -72,11 +102,12 @@ class AdviceController extends AbstractController
     {
         if ($this->isCsrfTokenValid('deactivate' . $advice->getId(), $request->request->get('_token'))) {
             $advice->setStatus(2);
+            $advice->setUpdatedAt(new DateTimeImmutable());
             $adviceRepository->add($advice, true);
         }
         $this->addFlash(
             'danger',
-            $advice->getTitle() . ' ' .  ' a bien été désactivé. '
+            '"' . $advice->getTitle() . '" a bien été désactivé. '
         );
         return $this->redirectToRoute('app_backoffice_advices_list', [], Response::HTTP_SEE_OTHER);
     }
@@ -89,11 +120,12 @@ class AdviceController extends AbstractController
     {
         if ($this->isCsrfTokenValid('reactivate' . $advice->getId(), $request->request->get('_token'))) {
             $advice->setStatus(1);
+            $advice->setUpdatedAt(new DateTimeImmutable());
             $adviceRepository->add($advice, true);
         }
         $this->addFlash(
-            'sucess',
-            $advice->getTitle() . ' ' .  ' a bien été réactivé. '
+            'success',
+            '"' . $advice->getTitle() . '" a bien été réactivé. '
         );
         return $this->redirectToRoute('app_backoffice_advices_list', [], Response::HTTP_SEE_OTHER);
     }
