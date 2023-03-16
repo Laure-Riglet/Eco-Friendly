@@ -24,7 +24,7 @@ class AdviceController extends AbstractController
     public function list(Request $request, AdviceRepository $adviceRepository): Response
     {
         $category = $request->get('category', null);
-        $status = $request->get('status', null);
+        $status = $request->get('status', 1);
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 25);
         $offset = $request->get('offset', ($page - 1) * $limit ?? 0);

@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
-
 class ArticleController extends AbstractController
 {
 
@@ -21,7 +19,7 @@ class ArticleController extends AbstractController
     public function list(Request $request, ArticleRepository $articleRepository): Response
     {
         $category = $request->get('category', null);
-        $status = $request->get('status', null);
+        $status = $request->get('status', 1);
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 50);
         $offset = $request->get('offset', ($page - 1) * $limit ?? 0);
