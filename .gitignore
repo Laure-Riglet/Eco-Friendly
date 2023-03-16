@@ -2,6 +2,8 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/bin/console
+/bin/phpunit
 /composer.lock
 /config/secrets/prod/prod.decrypt.private.php
 /config/jwt/private.pem
