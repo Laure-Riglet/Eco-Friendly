@@ -26,9 +26,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends AbstractController
 
-// TODO: rework this controller and the related voter to clearly separate the possible
-// TODO: backoffice actions on different roles (user and author)
-
 {
     /**
      * @Route("/back_office/utilisateurs/membres", name="app_backoffice_members_list", methods={"GET", "POST"})
@@ -396,6 +393,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/back_office/utilisateurs/{id}/desactiver", name="app_backoffice_users_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs") 
      */
     public function deactivate(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -404,6 +402,7 @@ class UserController extends AbstractController
             $user->setUpdatedAt(new DateTimeImmutable());
             $userRepository->add($user, true);
         }
+
         $this->addFlash(
             'danger',
             'Le profil de ' . $user->getFirstname() . ' ' . $user->getLastname() . ' a bien été désactivé.'
@@ -418,6 +417,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/back_office/utilisateurs/{id}/reactiver", name="app_backoffice_users_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function reactivate(Request $request, User $user, UserRepository $userRepository): Response
     {

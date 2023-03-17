@@ -70,19 +70,19 @@ class UserVoter extends Voter
      */
     private function canRead(User $userSubject, User $user)
     {
-        // return true or false
+        // All users can read their own account, with the exception of admins who can read all accounts information
         return $userSubject === $user || $this->security->isGranted('ROLE_ADMIN');
     }
 
     private function canUpdate(User $userSubject, User $user)
     {
-        // return true or false
+        // All users can update their own account, with the exception of admins who can update authors accounts as well
         return $userSubject === $user || ($this->security->isGranted('ROLE_ADMIN') && $userSubject->getRoles() !== ['ROLE_USER']);
     }
 
     private function canDelete(User $userSubject, User $user)
     {
-        // return true or false
-        return $userSubject === $user;
+        // Only members can delete their own account (not authors or admins)
+        return $userSubject === $user && $userSubject->getRoles() !== ['ROLE_AUTHOR'] && $userSubject !== ['ROLE_ADMIN'];
     }
 }
