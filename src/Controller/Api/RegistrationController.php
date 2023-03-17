@@ -41,9 +41,11 @@ class RegistrationController extends AbstractController
     ): Response {
         try {
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
-            // ensure that first name & last name are capitalized
+
+            // Ensure that first name & last name are capitalized
             $user->setFirstName(ucfirst($user->getFirstName()));
             $user->setLastName(ucfirst($user->getLastName()));
+
             $user->setCode($generator->codeGen());
             $user->setRoles(['ROLE_USER']);
             $user->setAvatar('https://eco-friendly.fr/assets/img/misc/default-avatar.png');
@@ -90,14 +92,13 @@ class RegistrationController extends AbstractController
     ): Response {
         $email = json_decode($request->getContent(), true)['email'];
         $user = $userRepository->findOneBy(['email' => $email]);
-        // TODO: See if this is the best way to handle this, maybe a custom exception would be better
-        if (!$user) {
-            return $this->json(['errors' => ['email' => ['Cette adresse email n\'existe pas']]], Response::HTTP_BAD_REQUEST);
+
+        // Weither the user doesn't exist or is already verified, we return a 400 status code with a generic message
+        if (!$user || $user->isVerified()) {
+            return $this->json(['errors' => ['email' => ['Cette adresse email n\'est pas en attente de validation']]], Response::HTTP_BAD_REQUEST);
         }
-        if ($user->isVerified()) {
-            return $this->json(['errors' => ['email' => ['Cette adresse email est déjà vérifiée']]], Response::HTTP_BAD_REQUEST);
-        }
-        // generate a signed url and email it to the user
+
+        // Generate a signed url and email it to the user
         $this->emailVerifier->sendEmailConfirmation(
             'app_verify_email',
             $user,

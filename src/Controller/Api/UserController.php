@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\AdviceRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use DateTimeImmutable;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -180,7 +181,7 @@ class UserController extends AbstractController
             return $this->json(['errors' => ['picture' => ['Une erreur est survenue lors de l\'upload de l\'image']]], Response::HTTP_BAD_REQUEST);
         }
 
-        // Resize the image to 80x80 and 
+        // Resize the image to 80x80
         list($width, $height) = getimagesize($filepath);
         $size = min($width, $height); // get the minimum dimension
         $dst_x = ($width - $size) / 2;
