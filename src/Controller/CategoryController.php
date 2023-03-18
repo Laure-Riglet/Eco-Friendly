@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/back_office/categories/ajouter", name="app_backoffice_categories_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SluggerService $slugger, CategoryRepository $categoryRepository): Response
+    public function new(Request $request, SlugService $slugger, CategoryRepository $categoryRepository): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/back_office/categories/{id}/editer", name="app_backoffice_categories_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
-    public function edit(Request $request, SluggerService $slugger, Category $category, CategoryRepository $categoryRepository): Response
+    public function edit(Request $request, SlugService $slugger, Category $category, CategoryRepository $categoryRepository): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Avatar;
 use App\Form\AvatarType;
 use App\Repository\AvatarRepository;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -28,7 +28,7 @@ class AvatarController extends AbstractController
     /**
      * @Route("back_office/avatars/ajouter", name="app_backoffice_avatars_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SluggerService $slugger, AvatarRepository $avatarRepository): Response
+    public function new(Request $request, SlugService $slugger, AvatarRepository $avatarRepository): Response
     {
         $avatar = new Avatar();
         $avatar->setCreatedAt(new DateTimeImmutable());
@@ -80,7 +80,7 @@ class AvatarController extends AbstractController
     /**
      * @Route("back_office/avatars/{id}/modifier", name="app_backoffice_avatars_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
-    public function edit(Request $request, SluggerService $slugger, Avatar $avatar, AvatarRepository $avatarRepository): Response
+    public function edit(Request $request, SlugService $slugger, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
         $form = $this->createForm(AvatarType::class, $avatar);
         $form->handleRequest($request);

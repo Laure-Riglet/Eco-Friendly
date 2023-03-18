@@ -44,34 +44,27 @@ class ArticleVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        // you know $subject is a Article object, thanks to `supports()`
-        /** @var Article $article */
+
+        /** 
+         * @var Article $article 
+         * */
         $article = $subject;
 
-        // ... (check conditions and return true to grant permission) ...
+        // Check conditions and return boolean
         switch ($attribute) {
             case self::ARTICLE_READ:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canRead($article, $user);
                 break;
             case self::ARTICLE_EDIT:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canEdit($article, $user);
                 break;
             case self::ARTICLE_DEACTIVATE:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canDeactivate($article, $user);
                 break;
             case self::ARTICLE_REACTIVATE:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canReactivate($article, $user);
                 break;
         }
-
         return false;
     }
 
@@ -80,6 +73,7 @@ class ArticleVoter extends Voter
      * @param User $user the user requesting action on the subject
      * @return bool
      */
+
     private function canRead(Article $article, User $user)
     {
         return ($article->getAuthor() === $user || $this->security->isGranted('ROLE_ADMIN'));
@@ -95,7 +89,7 @@ class ArticleVoter extends Voter
         return ($article->getAuthor() === $user || $this->security->isGranted('ROLE_ADMIN'));
     }
 
-    private function canReactivate(Article $article, User $user)
+    private function canReactivate()
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }

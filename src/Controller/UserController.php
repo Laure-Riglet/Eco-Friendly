@@ -9,7 +9,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\CodeGeneratorService;
 use App\Service\GeneratorService;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -312,6 +312,9 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('user_update', $user);
 
+        // Clone the user to keep the original data for sensitive fields
+        $originalUser = clone $user;
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -367,6 +370,11 @@ class UserController extends AbstractController
 
                 $user->setAvatar($this->getParameter('uploads_user_url') . $filename);
             }
+
+            empty($user->getFirstname()) ? $user->setFirstname($originalUser->getFirstname()) : $user->setFirstname($user->getFirstname());
+            empty($user->getLastname()) ? $user->setLastname($originalUser->getLastname()) : $user->setLastname($user->getLastname());
+            empty($user->getNickname()) ? $user->setNickname($originalUser->getNickname()) : $user->setNickname($user->getNickname());
+            empty($user->getEmail()) ? $user->setEmail($originalUser->getEmail()) : $user->setEmail($user->getEmail());
             $user->setUpdatedAt(new DateTimeImmutable());
             $userRepository->add($user, true);
 

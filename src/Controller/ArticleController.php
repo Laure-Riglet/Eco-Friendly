@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Form\ArticleType;
 use App\Form\ContentListType;
 use App\Repository\ArticleRepository;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -74,7 +74,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/back_office/articles/ajouter", name="app_backoffice_articles_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SluggerService $slugger, ArticleRepository $articleRepository): Response
+    public function new(Request $request, SlugService $slugger, ArticleRepository $articleRepository): Response
     {
         $article = new Article();
         $article->setAuthor($this->getUser());
@@ -189,7 +189,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/back_office/articles/{id}/editer", name="app_backoffice_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
-    public function edit(Request $request, SluggerService $slugger, Article $article, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, SlugService $slugger, Article $article, ArticleRepository $articleRepository): Response
     {
         $this->denyAccessUnlessGranted('article_edit', $article);
 

@@ -8,7 +8,7 @@ use App\Entity\Avatar;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Service\GeneratorService;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
     private $slugger;
     private $generator;
 
-    public function __construct(SluggerService $slugger, UserPasswordHasherInterface $passwordHasher, GeneratorService $generator)
+    public function __construct(SlugService $slugger, UserPasswordHasherInterface $passwordHasher, GeneratorService $generator)
     {
         $this->passwordHasher = $passwordHasher;
         $this->slugger = $slugger;

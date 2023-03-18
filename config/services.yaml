@@ -38,15 +38,27 @@ services:
     App\EventListener\AdviceListener:
         tags:
             - # these are the options required to define the entity listener
-                name: doctrine.orm.event_listener
-                event: PostPersist
-                entity: App\Entity\Advice
-                method: SetSlug
+                name: 'doctrine.orm.event_listener'
+                event: 'PostPersist'
+                entity: 'App\Entity\Advice'
+                method: 'SetSlug'
             - # these are the options required to define the entity listener
-                name: doctrine.orm.event_listener
-                event: PostUpdate
-                entity: App\Entity\Advice
-                method: SetSlug
+                name: 'doctrine.orm.event_listener'
+                event: 'PostUpdate'
+                entity: 'App\Entity\Advice'
+                method: 'SetSlug'
+    App\EventListener\ArticleListener:
+        tags:
+            - # these are the options required to define the entity listener
+                name: 'doctrine.orm.event_listener'
+                event: 'PostPersist'
+                entity: 'App\Entity\Article'
+                method: 'SetSlug'
+            - # these are the options required to define the entity listener
+                name: 'doctrine.orm.event_listener'
+                event: 'PostUpdate'
+                entity: 'App\Entity\Article'
+                method: 'SetSlug'
     acme_api.event.authentication_success_listener:
         class: App\EventListener\AuthenticationSuccessListener
         tags:

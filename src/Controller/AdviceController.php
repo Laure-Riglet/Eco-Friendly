@@ -6,7 +6,7 @@ use App\Entity\Advice;
 use App\Form\AdviceType;
 use App\Form\ContentListType;
 use App\Repository\AdviceRepository;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -69,7 +69,7 @@ class AdviceController extends AbstractController
      * @Route("/back_office/conseils/{id}/editer", name="app_backoffice_advices_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
-    public function edit(Request $request, SluggerService $slugger, Advice $advice, AdviceRepository $adviceRepository): Response
+    public function edit(Request $request, SlugService $slugger, Advice $advice, AdviceRepository $adviceRepository): Response
     {
         $form = $this->createForm(AdviceType::class, $advice);
         $form->handleRequest($request);

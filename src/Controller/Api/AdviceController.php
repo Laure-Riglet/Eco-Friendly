@@ -5,7 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Advice;
 use App\Repository\AdviceRepository;
 use App\Repository\CategoryRepository;
-use App\Service\SluggerService;
+use App\Service\SlugService;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +44,7 @@ class AdviceController extends AbstractController
     /**
      * @Route("/api/advices", name="app_api_advices_new", methods={"POST"})
      */
-    public function new(Request $request, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository): Response
+    public function new(Request $request, SlugService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository): Response
     {
         try {
             $advice = $serializer->deserialize($request->getContent(), Advice::class, 'json');
@@ -104,7 +104,7 @@ class AdviceController extends AbstractController
     /**
      * @Route("/api/advices/{id}", name="app_api_advices_update", requirements={"id":"\d+"}, methods={"PUT"})
      */
-    public function update(Request $request, ?Advice $advice, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository, CategoryRepository $categoryRepository): Response
+    public function update(Request $request, ?Advice $advice, SlugService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository, CategoryRepository $categoryRepository): Response
     {
         $this->denyAccessUnlessGranted('advice_edit', $advice);
 

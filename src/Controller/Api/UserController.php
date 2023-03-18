@@ -55,6 +55,7 @@ class UserController extends AbstractController
             $user = $serializer->deserialize($request->getContent(), User::class, 'json', ['object_to_populate' => $user]);
             $user->setFirstName(ucfirst($user->getFirstName()));
             $user->setLastName(ucfirst($user->getLastName()));
+
             // Keep the original data for sensitive fields
             $user->setPassword($originalUser->getPassword());
             $user->setCode($originalUser->getCode());

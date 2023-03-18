@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusExce
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+// This class is used to check if the user is verified and active via the API
 class ApiVerifiedUserChecker implements UserCheckerInterface
 {
     public function checkPreAuth(UserInterface $user): void
