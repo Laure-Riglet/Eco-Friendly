@@ -145,7 +145,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // Available parameters: category, page, limit, offset, sorttype, order, search
+    // Available parameters: category, status, page, limit, offset, sorttype, order, search
     public function findAllWithParameters(
         ?int $category,
         ?int $status,

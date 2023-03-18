@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/api/home", name="app_api_home_list")
+     * @Route("/v2/home", name="app_api_home_list")
      */
     public function list(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {

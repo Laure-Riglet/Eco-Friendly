@@ -41,7 +41,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Endpoint to request a password reset.
      *
-     * @Route("/api/reset-password", name="app_api_forgotpassword_request", methods={"POST"})
+     * @Route("/v2/reset-password", name="app_api_forgotpassword_request", methods={"POST"})
      */
     public function request(
         Request $request,
@@ -94,7 +94,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Validates and process the reset URL that the user clicked in their email.
      *
-     * @Route("/api/reset-password/reset/{token}", name="app_api_reset_password", methods={"POST"})
+     * @Route("/v2/reset-password/reset/{token}", name="app_api_reset_password", methods={"POST"})
      */
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, string $token = null): Response
     {

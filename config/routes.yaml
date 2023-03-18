@@ -1,4 +1,4 @@
 # config/routes.yaml
 api_login_check:
-    path: /api/login_check
+    path: /v2/login_check
     

@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AdviceController extends AbstractController
 {
     /**
-     * @Route("/api/advices", name="app_api_advices_list", methods={"GET"})
+     * @Route("/v2/advices", name="app_api_advices_list", methods={"GET"})
      */
     public function list(Request $request, AdviceRepository $adviceRepository): Response
     {
@@ -42,7 +42,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/api/advices", name="app_api_advices_new", methods={"POST"})
+     * @Route("/v2/advices", name="app_api_advices_new", methods={"POST"})
      */
     public function new(Request $request, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository): Response
     {
@@ -90,7 +90,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/api/advices/{id}", name="app_api_advices_read", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/v2/advices/{id}", name="app_api_advices_read", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function read(?Advice $advice, AdviceRepository $adviceRepository): Response
     {
@@ -102,7 +102,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/api/advices/{id}", name="app_api_advices_update", requirements={"id":"\d+"}, methods={"PUT"})
+     * @Route("/v2/advices/{id}", name="app_api_advices_update", requirements={"id":"\d+"}, methods={"PUT"})
      */
     public function update(Request $request, ?Advice $advice, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository, CategoryRepository $categoryRepository): Response
     {
@@ -156,7 +156,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/api/advices/{id}", name="app_api_advices_delete", requirements={"id":"\d+"}, methods={"DELETE"})
+     * @Route("/v2/advices/{id}", name="app_api_advices_delete", requirements={"id":"\d+"}, methods={"DELETE"})
      */
     public function delete(?Advice $advice, AdviceRepository $adviceRepository): Response
     {
