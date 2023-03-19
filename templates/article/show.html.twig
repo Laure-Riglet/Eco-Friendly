@@ -56,7 +56,7 @@
                         </p>         
                         <div class="d-flex flex-nowrap justify-content-end align-items-center">
                             {% if not article.status is same as 2  or is_granted('ROLE_ADMIN') %}
-                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('app_backoffice_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>
                             {% endif %}
                             {% include "_fragments/_button_activate_article.html.twig" %}
                         </div>                    

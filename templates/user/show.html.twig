@@ -6,7 +6,7 @@
 
     {% include "_fragments/_flash_message.html.twig" %}
     
-    {% if app.request.pathinfo is same as (path('app_backoffice_home')) and "ROLE_AUTHOR" in app.user.roles %}
+    {% if app.request.pathinfo is same as (path('bo_home')) and "ROLE_AUTHOR" in app.user.roles %}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Espace Auteur</h1>
     </div>
@@ -44,8 +44,8 @@
                                 </div>
                                 <p class="card-text">{{ article.content|slice(0, 100)|striptags }} [...]</p>
                                 <div class="d-flex flex-nowrap justify-content-end align-items-center">
-                                    <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
-                                    <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('app_backoffice_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>
+                                    <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
+                                    <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>
                                     
                                     {% include "_fragments/_button_activate_article.html.twig" %}
 
@@ -72,8 +72,8 @@
                                 </div>
                                 <p class="card-text">{{ advice.content|slice(0, 100)|striptags }} [...]</p>
                                 <div class="d-flex flex-nowrap justify-content-end align-items-center">
-                                    <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_advices_show', {'id': advice.id}) }}"><i class="bi bi-eye"></i></a>
-                                    <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('app_backoffice_advices_edit', {'id': advice.id}) }}"><i class="bi bi-pencil"></i></a>
+                                    <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_advices_show', {'id': advice.id}) }}"><i class="bi bi-eye"></i></a>
+                                    <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_advices_edit', {'id': advice.id}) }}"><i class="bi bi-pencil"></i></a>
                                     {% include "_fragments/_button_activate_advice.html.twig" %}
                                 </div>
                             </div>

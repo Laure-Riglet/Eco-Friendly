@@ -28,7 +28,7 @@ class UserController extends AbstractController
 
 {
     /**
-     * @Route("/back_office/utilisateurs/membres", name="app_backoffice_members_list", methods={"GET", "POST"})
+     * @Route("/back_office/utilisateurs/membres", name="bo_members_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function listMembers(Request $request, UserRepository $userRepository): Response
@@ -66,7 +66,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/utilisateurs/auteurs", name="app_backoffice_authors_list", methods={"GET", "POST"})
+     * @Route("/back_office/utilisateurs/auteurs", name="bo_authors_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function listAuthors(Request $request, UserRepository $userRepository): Response
@@ -104,7 +104,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/utilisateurs/ajouter", name="app_backoffice_users_new", methods={"GET", "POST"})
+     * @Route("/back_office/utilisateurs/ajouter", name="bo_users_new", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function new(
@@ -199,7 +199,7 @@ class UserController extends AbstractController
                 'Le profil de ' . $user->getFirstname() . ' ' . $user->getLastname() . ' a bien été créé.'
             );
 
-            return $this->redirectToRoute('app_backoffice_authors_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_authors_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new.html.twig', [
@@ -209,7 +209,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/utilisateurs/{id}", name="app_backoffice_users_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/back_office/utilisateurs/{id}", name="bo_users_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -219,7 +219,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/auteurs/{id}/creer", name="app_backoffice_users_create", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/back_office/auteurs/{id}/creer", name="bo_users_create", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function create(
         Request $request,
@@ -296,7 +296,7 @@ class UserController extends AbstractController
                 'Votre profil a bien été créé.'
             );
 
-            return $this->redirectToRoute('app_backoffice_home', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/create.html.twig', [
@@ -306,7 +306,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/utilisateurs/{id}/modifier", name="app_backoffice_users_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/back_office/utilisateurs/{id}/modifier", name="bo_users_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -323,7 +323,7 @@ class UserController extends AbstractController
                 $extension = $avatarFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
                     $this->addFlash('danger', 'Format d\'image non supporté');
-                    // return $this->redirectToRoute('app_backoffice_users_new');
+                    // return $this->redirectToRoute('bo_users_new');
                 }
 
                 $filename = $user->getId() . '-' . uniqid() . '.' . $extension;
@@ -336,7 +336,7 @@ class UserController extends AbstractController
                     );
                 } catch (FileException $e) {
                     $this->addFlash('danger', 'Une erreur est survenue lors de l\'upload de l\'image');
-                    // return $this->redirectToRoute('app_backoffice_users_new');
+                    // return $this->redirectToRoute('bo_users_new');
                 }
 
                 list($width, $height) = getimagesize($filepath);
@@ -375,14 +375,14 @@ class UserController extends AbstractController
                     'success',
                     'Votre profil a bien été modifié.'
                 );
-                return $this->redirectToRoute('app_backoffice_home', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bo_home', [], Response::HTTP_SEE_OTHER);
             }
 
             $this->addFlash(
                 'success',
                 'Le profil de ' . $user->getFirstname() . ' ' . $user->getLastname() . ' a bien été modifié.'
             );
-            return $this->redirectToRoute('app_backoffice_authors_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_authors_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/edit.html.twig', [
@@ -392,7 +392,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/utilisateurs/{id}/desactiver", name="app_backoffice_users_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/utilisateurs/{id}/desactiver", name="bo_users_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs") 
      */
     public function deactivate(Request $request, User $user, UserRepository $userRepository): Response
@@ -409,14 +409,14 @@ class UserController extends AbstractController
         );
 
         if (in_array('ROLE_AUTHOR', $user->getRoles())) {
-            return $this->redirectToRoute('app_backoffice_authors_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_authors_list', [], Response::HTTP_SEE_OTHER);
         } else {
-            return $this->redirectToRoute('app_backoffice_members_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_members_list', [], Response::HTTP_SEE_OTHER);
         }
     }
 
     /**
-     * @Route("/back_office/utilisateurs/{id}/reactiver", name="app_backoffice_users_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/utilisateurs/{id}/reactiver", name="bo_users_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function reactivate(Request $request, User $user, UserRepository $userRepository): Response
@@ -431,9 +431,9 @@ class UserController extends AbstractController
             'Le profil de ' . $user->getFirstname() . ' ' . $user->getLastname() . ' a bien été réactivé.'
         );
         if (in_array('ROLE_AUTHOR', $user->getRoles())) {
-            return $this->redirectToRoute('app_backoffice_authors_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_authors_list', [], Response::HTTP_SEE_OTHER);
         } else {
-            return $this->redirectToRoute('app_backoffice_members_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_members_list', [], Response::HTTP_SEE_OTHER);
         }
     }
 }

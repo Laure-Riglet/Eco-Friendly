@@ -36,7 +36,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      *
-     * @Route("/reset-password", name="app_backoffice_forgotpassword_request")
+     * @Route("/reset-password", name="bo_forgotpassword_request")
      */
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
@@ -103,7 +103,7 @@ class ResetPasswordController extends AbstractController
                 $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             ));
 
-            return $this->redirectToRoute('app_backoffice_forgotpassword_request');
+            return $this->redirectToRoute('bo_forgotpassword_request');
         }
 
         // The token is valid; allow the user to change their password.
@@ -126,7 +126,7 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            return $this->redirectToRoute('app_backoffice_security_login');
+            return $this->redirectToRoute('bo_security_login');
         }
 
         return $this->render('reset_password/reset.html.twig', [
@@ -149,7 +149,7 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
             // If you want to tell the user why a reset email was not sent, uncomment
-            // the lines below and change the redirect to 'app_backoffice_forgotpassword_request'.
+            // the lines below and change the redirect to 'bo_forgotpassword_request'.
             // Caution: This may reveal if a user is registered or not.
             //
             // $this->addFlash('reset_password_error', sprintf(

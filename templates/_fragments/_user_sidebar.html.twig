@@ -31,7 +31,7 @@
             {% endif %}
             <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">
                 {% if 'ROLE_AUTHOR' in user.roles or 'ROLE_ADMIN' in user.roles %}
-                <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('app_backoffice_users_edit', {'id': user.id}) }}"><i class="bi bi-pencil"></i></a>
+                <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_users_edit', {'id': user.id}) }}"><i class="bi bi-pencil"></i></a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') and not app.user is same as user %}
                 {% include "_fragments/_button_activate_user.html.twig"%}

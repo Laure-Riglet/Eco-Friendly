@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/back_office/articles", name="app_backoffice_articles_list", methods={"GET", "POST"})
+     * @Route("/back_office/articles", name="bo_articles_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Vous n'avez pas les droits pour accéder à cette page")
      */
     public function list(Request $request, ArticleRepository $articleRepository): Response
@@ -57,7 +57,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/auteurs/{id}", name="app_backoffice_articles_user", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/back_office/auteurs/{id}", name="bo_articles_user", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function findAllByUser(User $author, ArticleRepository $articleRepository): Response
     {
@@ -72,7 +72,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/ajouter", name="app_backoffice_articles_new", methods={"GET", "POST"})
+     * @Route("/back_office/articles/ajouter", name="bo_articles_new", methods={"GET", "POST"})
      */
     public function new(Request $request, SluggerService $slugger, ArticleRepository $articleRepository): Response
     {
@@ -110,7 +110,7 @@ class ArticleController extends AbstractController
                 $extension = $pictureFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
                     $this->addFlash('danger', 'Format d\'image non supporté');
-                    // return $this->redirectToRoute('app_backoffice_users_new');
+                    // return $this->redirectToRoute('bo_users_new');
                 }
 
                 $filename = substr($slugger->slugify($article->getTitle()), 0, 10) . uniqid() . '.' . $extension;
@@ -162,9 +162,9 @@ class ArticleController extends AbstractController
             );
 
             if ($this->isGranted('ROLE_ADMIN')) {
-                return $this->redirectToRoute('app_backoffice_articles_list', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bo_articles_list', [], Response::HTTP_SEE_OTHER);
             } else {
-                return $this->redirectToRoute('app_backoffice_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bo_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
             }
         }
 
@@ -175,7 +175,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/{id}", name="app_backoffice_articles_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/back_office/articles/{id}", name="bo_articles_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(Article $article): Response
     {
@@ -187,7 +187,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/{id}/editer", name="app_backoffice_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/back_office/articles/{id}/editer", name="bo_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, SluggerService $slugger, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -224,9 +224,9 @@ class ArticleController extends AbstractController
             );
 
             if ($this->isGranted('ROLE_ADMIN')) {
-                return $this->redirectToRoute('app_backoffice_articles_list', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bo_articles_list', [], Response::HTTP_SEE_OTHER);
             } else {
-                return $this->redirectToRoute('app_backoffice_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('bo_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
             }
         }
 
@@ -238,7 +238,7 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/back_office/articles/{id}/desactiver", name="app_backoffice_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/articles/{id}/desactiver", name="bo_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function deactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -255,14 +255,14 @@ class ArticleController extends AbstractController
             '"' . $article->getTitle() . '" a été désactivé.'
         );
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_backoffice_articles_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_articles_list', [], Response::HTTP_SEE_OTHER);
         } else {
-            return $this->redirectToRoute('app_backoffice_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
         }
     }
 
     /**
-     * @Route("/back_office/articles/{id}/reactiver", name="app_backoffice_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/articles/{id}/reactiver", name="bo_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function reactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -279,9 +279,9 @@ class ArticleController extends AbstractController
         );
 
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_backoffice_articles_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_articles_list', [], Response::HTTP_SEE_OTHER);
         } else {
-            return $this->redirectToRoute('app_backoffice_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_articles_user', ['id' => $article->getAuthor()->getId()], Response::HTTP_SEE_OTHER);
         }
     }
 }

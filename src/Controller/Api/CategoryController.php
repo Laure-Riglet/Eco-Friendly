@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/v2/categories", name="app_api_categories_list", methods={"GET"})
+     * @Route("/v2/categories", name="api_categories_list", methods={"GET"})
      */
     public function list(CategoryRepository $categoryRepository): Response
     {

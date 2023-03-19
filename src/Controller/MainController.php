@@ -14,23 +14,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="app_root", methods={"GET"})
-     * @Route("/back_office", name="app_backoffice_root", methods={"GET"})
+     * @Route("/", name="bo_root", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
-    public function root(): Response
+    public function boRoot(): Response
     {
-        return $this->redirectToRoute('app_backoffice_home');
+        return $this->redirectToRoute('bo_home');
     }
 
     /**
-     * @Route("/back_office/home", name="app_backoffice_home", methods={"GET"})
+     * @Route("/", name="api_root", methods={"GET"}, host="api.eco-friendly.localhost")
+     */
+    public function apiRoot(): Response
+    {
+        return $this->redirect('https://www.eco-friendly.fr');
+    }
+
+    /**
+     * @Route("/home", name="bo_home", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function home(EntityManagerInterface $entityManager): Response
     {
-        if (!$this->getUser()->isActive()) {
-            return $this->redirectToRoute('app_backoffice_security_login');
+        if (!$this->getUser() || !$this->getUser()->isActive()) {
+            return $this->redirectToRoute('bo_security_login');
         } else if (!$this->getUser()->isVerified()) {
-            return $this->redirectToRoute('app_backoffice_users_create', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('bo_users_create', ['id' => $this->getUser()->getId()]);
         } else if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             return $this->render('home/admin.html.twig', [
                 'user' => $this->getUser(),

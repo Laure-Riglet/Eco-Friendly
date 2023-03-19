@@ -1,7 +1,7 @@
 {% if advice.status is same as 2 %}
 <form 
     method="post" 
-    action="{{ path('app_backoffice_advices_reactivate', {'id': advice.id}) }}" 
+    action="{{ path('bo_advices_reactivate', {'id': advice.id}) }}" 
     onsubmit="return confirm('Êtes-vous sûr de vouloir réactiver ce conseil ?');"
     class="d-flex justify-content-start align-items-center"
 >
@@ -20,7 +20,7 @@
 {% else %}
 <form 
     method="post" 
-    action="{{ path('app_backoffice_advices_deactivate', {'id': advice.id}) }}" 
+    action="{{ path('bo_advices_deactivate', {'id': advice.id}) }}" 
     onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver ce conseil ?');"
     class="d-flex justify-content-start align-items-center"
 >

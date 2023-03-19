@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/register", name="app_api_users_register", methods={"POST"})
+     * @Route("/v2/register", name="api_users_register", methods={"POST"})
      */
     public function register(
         Request $request,
@@ -84,7 +84,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/resend-email-confirmation", name="app_api_users_resendemailconfirmation", methods={"POST"})
+     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"})
      */
     public function resendEmailConfirmation(
         Request $request,

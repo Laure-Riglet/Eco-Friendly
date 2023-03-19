@@ -15,9 +15,9 @@
             {{ form_start(form, {attr:{novalidate:"novalidate"}}) }}
             {{ form_widget(form) }}
             {% if 'articles' in app.request.pathinfo %}
-            <a class="btn btn-danger" href="{{ path('app_backoffice_articles_list') }}">{{ button_label|default('Annuler') }}</a>
+            <a class="btn btn-danger" href="{{ path('bo_articles_list') }}">{{ button_label|default('Annuler') }}</a>
             {% else %}
-            <a class="btn btn-danger" href="{{ path('app_backoffice_advices_list') }}">{{ button_label|default('Annuler') }}</a>
+            <a class="btn btn-danger" href="{{ path('bo_advices_list') }}">{{ button_label|default('Annuler') }}</a>
             {% endif %}
             <button class="btn btn-success">{{ button_label|default('Valider') }}</button>
             {{ form_end(form) }}

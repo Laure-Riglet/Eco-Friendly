@@ -29,7 +29,7 @@
         Si un compte correspondant à votre adresse e-mail existe, alors un e-mail contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe vient d'être envoyé.
         Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
-    <p>Si vous ne recevez pas d'email, vérifiez votre dossier de courrier indésirable (spam) ou <a href="{{ path('app_backoffice_forgotpassword_request') }}">essayez à nouveau</a>.</p>
+    <p>Si vous ne recevez pas d'email, vérifiez votre dossier de courrier indésirable (spam) ou <a href="{{ path('bo_forgotpassword_request') }}">essayez à nouveau</a>.</p>
 {% endblock %}
         </div>
     </div>

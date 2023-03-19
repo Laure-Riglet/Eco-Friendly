@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AvatarController extends AbstractController
 {
     /**
-     * @Route("back_office/avatars", name="app_backoffice_avatars_list", methods={"GET"})
+     * @Route("back_office/avatars", name="bo_avatars_list", methods={"GET"})
      */
     public function list(AvatarRepository $avatarRepository): Response
     {
@@ -26,7 +26,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("back_office/avatars/ajouter", name="app_backoffice_avatars_new", methods={"GET", "POST"})
+     * @Route("back_office/avatars/ajouter", name="bo_avatars_new", methods={"GET", "POST"})
      */
     public function new(Request $request, SluggerService $slugger, AvatarRepository $avatarRepository): Response
     {
@@ -58,7 +58,7 @@ class AvatarController extends AbstractController
                 'success',
                 '"' . $avatar->getName() . '" a bien été ajouté.'
             );
-            return $this->redirectToRoute('app_backoffice_avatars_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_avatars_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('avatar/new.html.twig', [
@@ -68,7 +68,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("back_office/avatars/{id}", name="app_backoffice_avatars_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("back_office/avatars/{id}", name="bo_avatars_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(Avatar $avatar): Response
     {
@@ -78,7 +78,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("back_office/avatars/{id}/modifier", name="app_backoffice_avatars_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("back_office/avatars/{id}/modifier", name="bo_avatars_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, SluggerService $slugger, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
@@ -109,7 +109,7 @@ class AvatarController extends AbstractController
                 'success',
                 '"' . $avatar->getName() . '" a bien été modifié'
             );
-            return $this->redirectToRoute('app_backoffice_avatars_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_avatars_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('avatar/edit.html.twig', [
@@ -119,7 +119,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("back_office/avatars/{id}/desactiver", name="app_backoffice_avatars_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("back_office/avatars/{id}/desactiver", name="bo_avatars_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function deactivate(Request $request, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
@@ -132,11 +132,11 @@ class AvatarController extends AbstractController
             'danger',
             '"' . $avatar->getName() . '" a été désactivé.'
         );
-        return $this->redirectToRoute('app_backoffice_avatars_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bo_avatars_list', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
-     * @Route("back_office/avatars/{id}/reactiver", name="app_backoffice_avatars_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("back_office/avatars/{id}/reactiver", name="bo_avatars_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function reactivate(Request $request, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
@@ -149,6 +149,6 @@ class AvatarController extends AbstractController
             'success',
             '"' . $avatar->getName() . '" a été activé.'
         );
-        return $this->redirectToRoute('app_backoffice_avatars_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bo_avatars_list', [], Response::HTTP_SEE_OTHER);
     }
 }

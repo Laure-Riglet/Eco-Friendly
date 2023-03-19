@@ -42,13 +42,13 @@
                                         {% include "_fragments/_user_active_tag.html.twig" with {status:author.isActive} %}
                                     </td>
                                     <td>
-                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_users_show', {'id': author.id}) }}"><i class="bi bi-eye"></i></a>
+                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_users_show', {'id': author.id}) }}"><i class="bi bi-eye"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}                        
                             </tbody>
                         </table>
-                        <a href="{{ path('app_backoffice_authors_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les auteurs</a>
+                        <a href="{{ path('bo_authors_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les auteurs</a>
                     </div>
                     <!-- Table 3 -->
                     <div class="col-md-6">
@@ -72,13 +72,13 @@
                                         {% include "_fragments/_user_active_tag.html.twig" with {status:member.isActive} %}
                                     </td>
                                     <td>
-                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_users_show', {'id': member.id}) }}"><i class="bi bi-eye"></i></a>
+                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_users_show', {'id': member.id}) }}"><i class="bi bi-eye"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}                        
                             </tbody>
                         </table>
-                        <a href="{{ path('app_backoffice_members_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les membres</a>
+                        <a href="{{ path('bo_members_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les membres</a>
                     </div>
                 </div>
                 <div class="row">
@@ -103,13 +103,13 @@
                                         <span class="badge bg-info">{{ article.category.name }}</span>
                                     </td>
                                     <td>
-                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
+                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}                        
                             </tbody>
                         </table>
-                        <a href="{{ path('app_backoffice_articles_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les articles</a>
+                        <a href="{{ path('bo_articles_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les articles</a>
                     </div>
                     <!-- Table 4 -->
                     <div class="col-md-6">
@@ -132,13 +132,13 @@
                                         <span class="badge bg-info">{{ advice.category.name }}</span>
                                     </td>
                                     <td>
-                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('app_backoffice_advices_show', {'id': advice.id}) }}"><i class="bi bi-eye"></i></a>
+                                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_advices_show', {'id': advice.id}) }}"><i class="bi bi-eye"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}                        
                             </tbody>
                         </table>
-                        <a href="{{ path('app_backoffice_advices_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les conseils</a>
+                        <a href="{{ path('bo_advices_list') }}" class="btn btn-primary btn-lg btn-block w-100 mb-5">Voir tous les conseils</a>
                     </div>
                 </div>
             </div>

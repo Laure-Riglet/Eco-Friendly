@@ -14,7 +14,7 @@ class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/v2/articles", name="app_api_articles_list")
+     * @Route("/v2/articles", name="api_articles_list")
      */
     public function list(Request $request, ArticleRepository $articleRepository): Response
     {
@@ -36,7 +36,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/v2/articles/{id}", name="app_api_articles_read", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/v2/articles/{id}", name="api_articles_read", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function read(?Article $article, ArticleRepository $articleRepository): Response
     {

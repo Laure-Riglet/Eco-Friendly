@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/back_office/categories", name="app_backoffice_categories_list", methods={"GET"})
+     * @Route("/back_office/categories", name="bo_categories_list", methods={"GET"})
      */
     public function list(CategoryRepository $categoryRepository): Response
     {
@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/ajouter", name="app_backoffice_categories_new", methods={"GET", "POST"})
+     * @Route("/back_office/categories/ajouter", name="bo_categories_new", methods={"GET", "POST"})
      */
     public function new(Request $request, SluggerService $slugger, CategoryRepository $categoryRepository): Response
     {
@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
                 'La catégorie "' . $category->getName() . '" a bien été ajoutée'
             );
 
-            return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category/new.html.twig', [
@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}", name="app_backoffice_categories_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/back_office/categories/{id}", name="bo_categories_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(Category $category): Response
     {
@@ -64,7 +64,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}/editer", name="app_backoffice_categories_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/back_office/categories/{id}/editer", name="bo_categories_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, SluggerService $slugger, Category $category, CategoryRepository $categoryRepository): Response
     {
@@ -81,7 +81,7 @@ class CategoryController extends AbstractController
                 'La catégorie "' . $category->getName() . '" a bien été modifiée'
             );
 
-            return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category/edit.html.twig', [
@@ -91,7 +91,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}/desactiver", name="app_backoffice_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/categories/{id}/desactiver", name="bo_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
     
      */
     public function deactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
@@ -106,11 +106,11 @@ class CategoryController extends AbstractController
             'danger',
             'La catégorie "' . $category->getName() . '" a bien été désactivée.'
         );
-        return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
-     * @Route("/back_office/categories/{id}/reactiver", name="app_backoffice_categories_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/back_office/categories/{id}/reactiver", name="bo_categories_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      
      */
     public function reactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
@@ -125,6 +125,6 @@ class CategoryController extends AbstractController
             'La catégorie "' . $category->getName() . '" a bien été réactivée.'
         );
 
-        return $this->redirectToRoute('app_backoffice_categories_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);
     }
 }
