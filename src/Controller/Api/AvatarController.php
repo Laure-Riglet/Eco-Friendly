@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AvatarController extends AbstractController
 {
     /**
-     * @Route("/v2/avatars", name="api_avatars_list")
+     * @Route("/v2/avatars", name="api_avatars_list", host="api.eco-friendly.localhost")
      */
     public function list(AvatarRepository $avatarRepository): Response
     {

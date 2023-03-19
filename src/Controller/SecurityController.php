@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/back_office/connexion", name="bo_security_login")
+     * @Route("/connexion", name="bo_security_login", host="backoffice.eco-friendly.localhost")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -27,7 +27,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/deconnexion", name="bo_security_logout", methods={"GET"})
+     * @Route("/deconnexion", name="bo_security_logout", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function logout(): void
     {

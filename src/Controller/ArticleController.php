@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/back_office/articles", name="bo_articles_list", methods={"GET", "POST"})
+     * @Route("/articles", name="bo_articles_list", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN", message="Vous n'avez pas les droits pour accéder à cette page")
      */
     public function list(Request $request, ArticleRepository $articleRepository): Response
@@ -57,7 +57,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/auteurs/{id}", name="bo_articles_user", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/auteurs/{id}", name="bo_articles_user", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function findAllByUser(User $author, ArticleRepository $articleRepository): Response
     {
@@ -72,14 +72,14 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/ajouter", name="bo_articles_new", methods={"GET", "POST"})
+     * @Route("/articles/ajouter", name="bo_articles_new", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function new(Request $request, SluggerService $slugger, ArticleRepository $articleRepository): Response
     {
         $article = new Article();
         $article->setAuthor($this->getUser());
         $article->setCreatedAt(new DateTimeImmutable());
-        $article->setPicture('https://eco-friendly.fr/assets/img/misc/default-article-illustration.png');
+        $article->setPicture('https://cdn.eco-friendly.fr/assets/img/misc/default-article-illustration.png');
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -175,7 +175,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/{id}", name="bo_articles_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/articles/{id}", name="bo_articles_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function show(Article $article): Response
     {
@@ -187,7 +187,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/{id}/editer", name="bo_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/articles/{id}/editer", name="bo_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function edit(Request $request, SluggerService $slugger, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -238,7 +238,7 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/back_office/articles/{id}/desactiver", name="bo_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/articles/{id}/desactiver", name="bo_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function deactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -262,7 +262,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/articles/{id}/reactiver", name="bo_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/articles/{id}/reactiver", name="bo_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function reactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {

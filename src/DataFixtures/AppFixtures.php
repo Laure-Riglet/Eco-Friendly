@@ -59,13 +59,13 @@ class AppFixtures extends Fixture
         // ! Adding Avatars
 
         $avatars = [
-            'Ours' => 'https://eco-friendly.fr/assets/img/avatars/ours.png',
-            'Mésange bleue' => 'https://eco-friendly.fr/assets/img/avatars/mesange-bleue.png',
-            'Chevreuil' => 'https://eco-friendly.fr/assets/img/avatars/chevreuil.png',
-            'Grenouille' => 'https://eco-friendly.fr/assets/img/avatars/grenouille.png',
-            'Renard' => 'https://eco-friendly.fr/assets/img/avatars/renard.png',
-            'Lièvre' => 'https://eco-friendly.fr/assets/img/avatars/lievre.png',
-            'Papillon' => 'https://eco-friendly.fr/assets/img/avatars/papillon.png',
+            'Ours' => 'https://cdn.eco-friendly.fr/assets/img/avatars/ours.png',
+            'Mésange bleue' => 'https://cdn.eco-friendly.fr/assets/img/avatars/mesange-bleue.png',
+            'Chevreuil' => 'https://cdn.eco-friendly.fr/assets/img/avatars/chevreuil.png',
+            'Grenouille' => 'https://cdn.eco-friendly.fr/assets/img/avatars/grenouille.png',
+            'Renard' => 'https://cdn.eco-friendly.fr/assets/img/avatars/renard.png',
+            'Lièvre' => 'https://cdn.eco-friendly.fr/assets/img/avatars/lievre.png',
+            'Papillon' => 'https://cdn.eco-friendly.fr/assets/img/avatars/papillon.png',
         ];
 
         foreach ($avatars as $name => $picture) {
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
         $user->setLastname('Istrateur');
         $user->setNickname('NoSysAdmin');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://eco-friendly.fr/uploads/users/61-640e0f721e21b.png');
+        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/61-640e0f721e21b.png');
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
@@ -123,7 +123,7 @@ class AppFixtures extends Fixture
         $user->setLastname('Lebowski');
         $user->setNickname('The_Dude');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://eco-friendly.fr/uploads/users/6-640e10d932757.jpg');
+        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/6-640e10d932757.jpg');
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));

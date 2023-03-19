@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/v2/users/{id}", name="api_users_read", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/v2/users/{id}", name="api_users_read", requirements={"id":"\d+"}, methods={"GET"}, host="api.eco-friendly.localhost")
      */
     public function read(?User $user, UserRepository $userRepository): Response
     {
@@ -37,7 +37,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}", name="api_users_update", requirements={"id":"\d+"}, methods={"PUT"})
+     * @Route("/v2/users/{id}", name="api_users_update", requirements={"id":"\d+"}, methods={"PUT"}, host="api.eco-friendly.localhost")
      */
     public function update(Request $request, ?User $user, SerializerInterface $serializer, ValidatorInterface $validator, UserRepository $userRepository): Response
     {
@@ -99,7 +99,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/v2/users/{id}/email-update", name="api_users_emailupdate", methods={"POST"})
+     * @Route("/v2/users/{id}/email-update", name="api_users_emailupdate", methods={"POST"}, host="api.eco-friendly.localhost")
      */
     public function emailUpdate(Request $request, ?User $user, EmailVerifier $emailVerifier, UserRepository $userRepository)
     {
@@ -131,7 +131,7 @@ class UserController extends AbstractController
 
         // Generate a signed url and email it to the user
         $emailVerifier->sendEmailConfirmation(
-            'app_verify_email',
+            'api_verify_email',
             $user,
             (new TemplatedEmail())
                 ->from(new Address('no-reply@eco-friendly.fr', 'Eco-Friendly'))
@@ -145,7 +145,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}/avatar", name="api_users_avatar", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/v2/users/{id}/avatar", name="api_users_avatar", requirements={"id":"\d+"}, methods={"POST"}, host="api.eco-friendly.localhost")
      */
     // TODO: Create a service to handle file upload & reuse it in several controllers
     public function avatarUpload(Request $request, ?User $user, UserRepository $userRepository): Response
@@ -222,7 +222,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}", name="api_users_delete", requirements={"id":"\d+"}, methods={"DELETE"})
+     * @Route("/v2/users/{id}", name="api_users_delete", requirements={"id":"\d+"}, methods={"DELETE"}, host="api.eco-friendly.localhost")
      */
     public function delete(?User $user, UserRepository $userRepository, AdviceRepository $adviceRepository): Response
     {

@@ -36,7 +36,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      *
-     * @Route("/reset-password", name="bo_forgotpassword_request")
+     * @Route("/reset-password", name="bo_forgotpassword_request", host="backoffice.eco-friendly.localhost")
      */
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
@@ -59,7 +59,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Confirmation page after a user has requested a password reset.
      *
-     * @Route("/reset-password/check-email", name="app_check_email")
+     * @Route("/reset-password/check-email", name="app_check_email", host="backoffice.eco-friendly.localhost")
      */
     public function checkEmail(): Response
     {
@@ -77,7 +77,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Validates and process the reset URL that the user clicked in their email.
      *
-     * @Route("/reset-password/reset/{token}", name="app_reset_password")
+     * @Route("/reset-password/reset/{token}", name="app_reset_password", host="backoffice.eco-friendly.localhost")
      */
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {

@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/register", name="api_users_register", methods={"POST"})
+     * @Route("/v2/register", name="api_users_register", methods={"POST"}, host="api.eco-friendly.localhost")
      */
     public function register(
         Request $request,
@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
 
             $user->setCode($generator->codeGen());
             $user->setRoles(['ROLE_USER']);
-            $user->setAvatar('https://eco-friendly.fr/assets/img/misc/default-avatar.png');
+            $user->setAvatar('https://cdn.eco-friendly.fr/assets/img/misc/default-avatar.png');
             $user->setIsActive(true);
             $user->setIsVerified(false);
             $user->setCreatedAt(new DateTimeImmutable());
@@ -70,7 +70,7 @@ class RegistrationController extends AbstractController
 
         // generate a signed url and email it to the user
         $this->emailVerifier->sendEmailConfirmation(
-            'app_verify_email',
+            'api_verify_email',
             $user,
             (new TemplatedEmail())
                 ->from(new Address('no-reply@eco-friendly.fr', 'Eco-Friendly'))
@@ -84,7 +84,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"})
+     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"}, host="api.eco-friendly.localhost")
      */
     public function resendEmailConfirmation(
         Request $request,
@@ -100,7 +100,7 @@ class RegistrationController extends AbstractController
 
         // Generate a signed url and email it to the user
         $this->emailVerifier->sendEmailConfirmation(
-            'app_verify_email',
+            'api_verify_email',
             $user,
             (new TemplatedEmail())
                 ->from(new Address('no-reply@eco-friendly.fr', 'Eco-Friendly'))
@@ -114,7 +114,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/verify/email", name="api_verify_email", host="api.eco-friendly.localhost")
      */
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
@@ -134,6 +134,6 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             return $this->json(['errors' => $exception->getReason()], Response::HTTP_BAD_REQUEST);
         }
-        return $this->redirect('https://oclock.io/');
+        return $this->redirect('https://eco-friendly.fr/validation');
     }
 }

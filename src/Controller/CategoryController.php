@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/back_office/categories", name="bo_categories_list", methods={"GET"})
+     * @Route("/categories", name="bo_categories_list", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function list(CategoryRepository $categoryRepository): Response
     {
@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/ajouter", name="bo_categories_new", methods={"GET", "POST"})
+     * @Route("/categories/ajouter", name="bo_categories_new", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function new(Request $request, SluggerService $slugger, CategoryRepository $categoryRepository): Response
     {
@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}", name="bo_categories_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/categories/{id}", name="bo_categories_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function show(Category $category): Response
     {
@@ -64,7 +64,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}/editer", name="bo_categories_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/categories/{id}/editer", name="bo_categories_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      */
     public function edit(Request $request, SluggerService $slugger, Category $category, CategoryRepository $categoryRepository): Response
     {
@@ -91,7 +91,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}/desactiver", name="bo_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/categories/{id}/desactiver", name="bo_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
     
      */
     public function deactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
@@ -110,7 +110,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/categories/{id}/reactiver", name="bo_categories_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/categories/{id}/reactiver", name="bo_categories_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
      
      */
     public function reactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response

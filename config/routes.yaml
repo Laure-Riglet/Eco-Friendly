@@ -1,4 +1,5 @@
 # config/routes.yaml
 api_login_check:
     path: /v2/login_check
+    host: api.eco-friendly.localhost
     

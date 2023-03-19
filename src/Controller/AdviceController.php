@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdviceController extends AbstractController
 {
     /**
-     * @Route("/back_office/conseils", name="bo_advices_list", methods={"GET", "POST"})
+     * @Route("/conseils", name="bo_advices_list", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
     public function list(Request $request, AdviceRepository $adviceRepository): Response
@@ -55,7 +55,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/conseils/{id}", name="bo_advices_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/conseils/{id}", name="bo_advices_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
     public function show(Advice $advice): Response
@@ -66,7 +66,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/conseils/{id}/editer", name="bo_advices_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/conseils/{id}/editer", name="bo_advices_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
     public function edit(Request $request, SluggerService $slugger, Advice $advice, AdviceRepository $adviceRepository): Response
@@ -95,7 +95,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/conseils/{id}/desactiver", name="bo_advices_deactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/conseils/{id}/desactiver", name="bo_advices_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
     public function deactivate(Advice $advice, AdviceRepository $adviceRepository, Request $request): Response
@@ -113,7 +113,7 @@ class AdviceController extends AbstractController
     }
 
     /**
-     * @Route("/back_office/conseils/{id}/reactiver", name="bo_advices_reactivate", requirements={"id":"\d+"}, methods={"POST"})
+     * @Route("/conseils/{id}/reactiver", name="bo_advices_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
      * @isGranted("ROLE_ADMIN"), message="Vous n'avez pas les droits pour accéder à cette page"
      */
     public function reactivate(Advice $advice, AdviceRepository $adviceRepository, Request $request): Response

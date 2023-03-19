@@ -14,6 +14,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
+     * @Route("/", name="api_root", methods={"GET"}, host="api.eco-friendly.localhost")
+     */
+    public function apiRoot(): Response
+    {
+        return $this->redirect('https://www.eco-friendly.fr');
+    }
+
+    /**
+     * @Route("/v2", name="api_root_v2", methods={"GET"}, host="api.eco-friendly.localhost")
+     */
+    public function apiRootv2(): Response
+    {
+        return $this->json([
+            'message' => 'Welcome to the Eco-Friendly API',
+            // 'documentation' => 'https://documenter.getpostman.com/view/13200091/Tz5qZ9Zu',
+        ]);
+    }
+
+    /**
      * @Route("/", name="bo_root", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function boRoot(): Response
@@ -21,13 +40,6 @@ class MainController extends AbstractController
         return $this->redirectToRoute('bo_home');
     }
 
-    /**
-     * @Route("/", name="api_root", methods={"GET"}, host="api.eco-friendly.localhost")
-     */
-    public function apiRoot(): Response
-    {
-        return $this->redirect('https://www.eco-friendly.fr');
-    }
 
     /**
      * @Route("/home", name="bo_home", methods={"GET"}, host="backoffice.eco-friendly.localhost")
