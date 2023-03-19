@@ -15,11 +15,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern: ^/v2/login
+            pattern: ^/v2/signin
             user_checker: App\Security\Api\ApiVerifiedUserChecker
             stateless: true
             json_login:
-                check_path: /v2/login_check
+                check_path: /v2/signin
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
@@ -63,7 +63,7 @@ security:
             #    { path: ^/v2/advices, roles: [] }
             #    { path: ^/v2/users/\d+$, roles: ROLE_USER }
             #    { path: ^/v2/users/d+$, roles: ROLE_USER }
-            #    { path: ^/v2/login_check, roles: ROLE_USER }
+            #    { path: ^/v2/signin, roles: ROLE_USER }
             
           }
         
@@ -76,7 +76,7 @@ security:
         - { path: '^/back_office/', roles: ROLE_AUTHOR }
 
         # ! API
-        - { path: ^/v2/login, roles: PUBLIC_ACCESS }
+        - { path: ^/v2/signin, roles: PUBLIC_ACCESS }
         - { path: ^/v2/advices, roles: ROLE_USER, methods: [POST] }
         - { path: ^/v2/advices/\d+, roles: ROLE_USER, methods: [PUT, DELETE] }
         - { path: ^/v2/users/\d+$, roles: ROLE_USER, methods: [GET, POST, PUT, DELETE] }

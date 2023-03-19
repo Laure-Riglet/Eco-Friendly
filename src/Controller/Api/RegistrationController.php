@@ -29,9 +29,9 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/register", name="api_users_register", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/signup", name="api_users_signup", methods={"POST"}, host="api.eco-friendly.localhost")
      */
-    public function register(
+    public function signup(
         Request $request,
         SerializerInterface $serializer,
         GeneratorService $generator,
