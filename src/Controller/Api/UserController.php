@@ -18,10 +18,13 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/v2/users/{id}", name="api_users_read", requirements={"id":"\d+"}, methods={"GET"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/users/{id}", name="api_users_read", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function read(?User $user, UserRepository $userRepository): Response
     {
@@ -37,7 +40,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}", name="api_users_update", requirements={"id":"\d+"}, methods={"PUT"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/users/{id}", name="api_users_update", requirements={"id":"\d+"}, methods={"PUT"})
      */
     public function update(Request $request, ?User $user, SerializerInterface $serializer, ValidatorInterface $validator, UserRepository $userRepository): Response
     {
@@ -99,7 +102,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/v2/users/{id}/email-update", name="api_users_emailupdate", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/users/{id}/email-update", name="api_users_emailupdate", methods={"POST"})
      */
     public function emailUpdate(Request $request, ?User $user, EmailVerifier $emailVerifier, UserRepository $userRepository)
     {
@@ -145,7 +148,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}/avatar", name="api_users_avatar", requirements={"id":"\d+"}, methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/users/{id}/avatar", name="api_users_avatar", requirements={"id":"\d+"}, methods={"POST"})
      */
     // TODO: Create a service to handle file upload & reuse it in several controllers
     public function avatarUpload(Request $request, ?User $user, UserRepository $userRepository): Response
@@ -222,7 +225,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/v2/users/{id}", name="api_users_delete", requirements={"id":"\d+"}, methods={"DELETE"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/users/{id}", name="api_users_delete", requirements={"id":"\d+"}, methods={"DELETE"})
      */
     public function delete(?User $user, UserRepository $userRepository, AdviceRepository $adviceRepository): Response
     {

@@ -19,6 +19,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -29,7 +32,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/signup", name="api_users_signup", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/signup", name="api_users_signup", methods={"POST"})
      */
     public function signup(
         Request $request,
@@ -84,7 +87,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"})
      */
     public function resendEmailConfirmation(
         Request $request,
@@ -114,7 +117,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="api_verify_email", host="api.eco-friendly.localhost")
+     * @Route("/verify/email", name="api_verify_email")
      */
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {

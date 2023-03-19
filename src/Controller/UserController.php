@@ -7,9 +7,7 @@ use App\Form\UserListType;
 use App\Form\ProfileType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
-use App\Service\CodeGeneratorService;
 use App\Service\GeneratorService;
-use App\Service\SluggerService;
 use DateTime;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,13 +20,14 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @Route(host="backoffice.eco-friendly.localhost")
+ */
 class UserController extends AbstractController
-
 {
     /**
-     * @Route("/utilisateurs/membres", name="bo_members_list", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/membres", name="bo_members_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function listMembers(Request $request, UserRepository $userRepository): Response
@@ -66,7 +65,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/auteurs", name="bo_authors_list", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/auteurs", name="bo_authors_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function listAuthors(Request $request, UserRepository $userRepository): Response
@@ -104,7 +103,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/ajouter", name="bo_users_new", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/ajouter", name="bo_users_new", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function new(
@@ -209,7 +208,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/{id}", name="bo_users_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/{id}", name="bo_users_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -219,7 +218,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/auteurs/{id}/creer", name="bo_users_create", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/auteurs/{id}/creer", name="bo_users_create", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function create(
         Request $request,
@@ -306,7 +305,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/{id}/modifier", name="bo_users_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/{id}/modifier", name="bo_users_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -401,7 +400,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/{id}/desactiver", name="bo_users_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/{id}/desactiver", name="bo_users_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs") 
      */
     public function deactivate(Request $request, User $user, UserRepository $userRepository): Response
@@ -425,7 +424,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateurs/{id}/reactiver", name="bo_users_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/utilisateurs/{id}/reactiver", name="bo_users_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      * @isGranted("ROLE_ADMIN", message="Accès réservé aux administrateurs")
      */
     public function reactivate(Request $request, User $user, UserRepository $userRepository): Response

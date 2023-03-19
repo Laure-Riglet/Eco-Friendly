@@ -7,10 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class AvatarController extends AbstractController
 {
     /**
-     * @Route("/v2/avatars", name="api_avatars_list", host="api.eco-friendly.localhost")
+     * @Route("/v2/avatars", name="api_avatars_list")
      */
     public function list(AvatarRepository $avatarRepository): Response
     {

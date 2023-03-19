@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/v2/articles", name="api_articles_list", methods={"GET"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/articles", name="api_articles_list", methods={"GET"})
      */
     public function list(Request $request, ArticleRepository $articleRepository): Response
     {
@@ -36,7 +38,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/v2/articles/{id}", name="api_articles_read", requirements={"id":"\d+"}, methods={"GET"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/articles/{id}", name="api_articles_read", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function read(?Article $article, ArticleRepository $articleRepository): Response
     {

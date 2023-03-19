@@ -11,10 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/v2/home", name="api_home_list", methods={"GET"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/home", name="api_home_list", methods={"GET"})
      */
     public function list(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {

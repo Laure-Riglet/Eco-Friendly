@@ -2,14 +2,10 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\ResetPasswordRequest;
 use App\Entity\User;
-use App\Form\ChangePasswordFormType;
-use App\Form\ResetPasswordRequestFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -17,14 +13,13 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
@@ -41,7 +36,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Endpoint to request a password reset.
      *
-     * @Route("/v2/reset-password", name="api_forgotpassword_request", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/reset-password", name="api_forgotpassword_request", methods={"POST"})
      */
     public function request(
         Request $request,
@@ -93,8 +88,7 @@ class ResetPasswordController extends AbstractController
 
     /**
      * Validates and process the reset URL that the user clicked in their email.
-     *
-     * @Route("/v2/reset-password/reset/{token}", name="api_reset_password", methods={"POST"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/reset-password/reset/{token}", name="api_reset_password", methods={"POST"})
      */
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, string $token = null): Response
     {

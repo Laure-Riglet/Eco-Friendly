@@ -7,10 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @Route(host="backoffice.eco-friendly.localhost")
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="bo_security_login", host="backoffice.eco-friendly.localhost")
+     * @Route("/connexion", name="bo_security_login", methods={"GET", "POST"})
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -27,7 +30,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/deconnexion", name="bo_security_logout", methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/deconnexion", name="bo_security_logout", methods={"GET"})
      */
     public function logout(): void
     {

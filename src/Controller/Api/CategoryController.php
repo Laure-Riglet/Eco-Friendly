@@ -7,10 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(host="api.eco-friendly.localhost")
+ */
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/v2/categories", name="api_categories_list", methods={"GET"}, host="api.eco-friendly.localhost")
+     * @Route("/v2/categories", name="api_categories_list", methods={"GET"})
      */
     public function list(CategoryRepository $categoryRepository): Response
     {

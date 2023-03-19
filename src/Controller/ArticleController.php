@@ -18,10 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @Route(host="backoffice.eco-friendly.localhost")
+ */
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/articles", name="bo_articles_list", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles", name="bo_articles_list", methods={"GET", "POST"})
      * @isGranted("ROLE_ADMIN", message="Vous n'avez pas les droits pour accéder à cette page")
      */
     public function list(Request $request, ArticleRepository $articleRepository): Response
@@ -57,7 +60,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/auteurs/{id}", name="bo_articles_user", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/auteurs/{id}", name="bo_articles_user", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function findAllByUser(User $author, ArticleRepository $articleRepository): Response
     {
@@ -72,7 +75,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/articles/ajouter", name="bo_articles_new", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles/ajouter", name="bo_articles_new", methods={"GET", "POST"})
      */
     public function new(Request $request, SluggerService $slugger, ArticleRepository $articleRepository): Response
     {
@@ -175,7 +178,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/articles/{id}", name="bo_articles_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles/{id}", name="bo_articles_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(Article $article): Response
     {
@@ -187,7 +190,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/articles/{id}/editer", name="bo_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles/{id}/editer", name="bo_articles_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, SluggerService $slugger, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -238,7 +241,7 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/articles/{id}/desactiver", name="bo_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles/{id}/desactiver", name="bo_articles_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function deactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -262,7 +265,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/articles/{id}/reactiver", name="bo_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/articles/{id}/reactiver", name="bo_articles_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function reactivate(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {

@@ -13,10 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(host="backoffice.eco-friendly.localhost")
+ */
 class AvatarController extends AbstractController
 {
     /**
-     * @Route("/avatars", name="bo_avatars_list", methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars", name="bo_avatars_list", methods={"GET"})
      */
     public function list(AvatarRepository $avatarRepository): Response
     {
@@ -26,7 +29,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("/avatars/ajouter", name="bo_avatars_new", methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars/ajouter", name="bo_avatars_new", methods={"GET", "POST"})
      */
     public function new(Request $request, SluggerService $slugger, AvatarRepository $avatarRepository): Response
     {
@@ -68,7 +71,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("/avatars/{id}", name="bo_avatars_show", requirements={"id":"\d+"}, methods={"GET"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars/{id}", name="bo_avatars_show", requirements={"id":"\d+"}, methods={"GET"})
      */
     public function show(Avatar $avatar): Response
     {
@@ -78,7 +81,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("/avatars/{id}/modifier", name="bo_avatars_edit", requirements={"id":"\d+"}, methods={"GET", "POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars/{id}/modifier", name="bo_avatars_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
      */
     public function edit(Request $request, SluggerService $slugger, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
@@ -119,7 +122,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("/avatars/{id}/desactiver", name="bo_avatars_deactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars/{id}/desactiver", name="bo_avatars_deactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function deactivate(Request $request, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
@@ -136,7 +139,7 @@ class AvatarController extends AbstractController
     }
 
     /**
-     * @Route("/avatars/{id}/reactiver", name="bo_avatars_reactivate", requirements={"id":"\d+"}, methods={"POST"}, host="backoffice.eco-friendly.localhost")
+     * @Route("/avatars/{id}/reactiver", name="bo_avatars_reactivate", requirements={"id":"\d+"}, methods={"POST"})
      */
     public function reactivate(Request $request, Avatar $avatar, AvatarRepository $avatarRepository): Response
     {
