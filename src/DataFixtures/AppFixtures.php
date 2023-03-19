@@ -108,7 +108,7 @@ class AppFixtures extends Fixture
         $user->setLastname('Kundera');
         $user->setNickname('MilKuKu');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://www.eco-friendly.fr/uploads/users/3-6403a58bd869d.jpg');
+        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/3-6403a58bd869d.jpg');
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));

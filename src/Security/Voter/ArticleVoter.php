@@ -40,61 +40,71 @@ class ArticleVoter extends Voter
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
+
         // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
             return false;
         }
-        // you know $subject is a Article object, thanks to `supports()`
-        /** @var Article $article */
+
+        // support() method has ensured that $subject is an Article object
+        /** 
+         * @var Article $article 
+         * */
         $article = $subject;
 
-        // ... (check conditions and return true to grant permission) ...
+        // Check conditions and return boolean
         switch ($attribute) {
             case self::ARTICLE_READ:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canRead($article, $user);
                 break;
             case self::ARTICLE_EDIT:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canEdit($article, $user);
                 break;
             case self::ARTICLE_DEACTIVATE:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canDeactivate($article, $user);
                 break;
             case self::ARTICLE_REACTIVATE:
-                // return true or false
-                // J'appelle ma méthode canEdit pour vérifier si l'utilisateur a le droit
                 return $this->canReactivate($article, $user);
                 break;
         }
-
         return false;
     }
 
     /**
      * @param Article $article the subject of the voter
      * @param User $user the user requesting action on the subject
-     * @return bool
+     * @return bool true if the user can read the article, false otherwise
      */
     private function canRead(Article $article, User $user)
     {
         return ($article->getAuthor() === $user || $this->security->isGranted('ROLE_ADMIN'));
     }
 
+    /**
+     * @param Article $article the subject of the voter
+     * @param User $user the user requesting action on the subject
+     * @return bool true if the user can edit the article, false otherwise
+     */
     private function canEdit(Article $article, User $user)
     {
         return (($article->getAuthor() === $user && $article->getStatus() !== 2) || $this->security->isGranted('ROLE_ADMIN'));
     }
 
+    /**
+     * @param Article $article the subject of the voter
+     * @param User $user the user requesting action on the subject
+     * @return bool true if the user can deactivate the article, false otherwise
+     */
     private function canDeactivate(Article $article, User $user)
     {
         return ($article->getAuthor() === $user || $this->security->isGranted('ROLE_ADMIN'));
     }
 
+    /**
+     * @param Article $article the subject of the voter
+     * @param User $user the user requesting action on the subject
+     * @return bool true if the user can reactivate the article, false otherwise
+     */
     private function canReactivate(Article $article, User $user)
     {
         return $this->security->isGranted('ROLE_ADMIN');
