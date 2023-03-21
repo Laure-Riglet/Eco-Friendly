@@ -87,7 +87,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/v2/resend-email-confirmation", name="api_users_resendemailconfirmation", methods={"POST"})
+     * @Route("/v2/resend", name="api_users_resend", methods={"POST"})
      */
     public function resendEmailConfirmation(
         Request $request,
