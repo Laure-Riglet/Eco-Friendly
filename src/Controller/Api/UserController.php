@@ -162,8 +162,8 @@ class UserController extends AbstractController
 
         $avatar = $request->files->get('avatar');
 
-        if (!$avatar) {
-            return $this->json(['errors' => ['picture' => ['Image non valide']]], Response::HTTP_BAD_REQUEST);
+        if (!$avatar || !$avatar->isValid()) {
+            return $this->json(['errors' => ['picture' => ['Image absente ou non valide']]], Response::HTTP_BAD_REQUEST);
         }
 
         // Check if the file is an image and if it's a supported format

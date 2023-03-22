@@ -33,7 +33,7 @@ class ApiAccessDeniedSubscriber implements EventSubscriberInterface
 
         // Si api n'est pas trouvé dans la string $route, on return pour stopper la fonction
         // If api is not found in the string $route, we "return" to stop the function
-        if (!strpos($route, "api")) {
+        if (!str_contains($route, "api_")) {
             return;
         }
 

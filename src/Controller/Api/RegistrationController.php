@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/v2/signup", name="api_users_signup", methods={"POST"})
      */
-    public function signup(
+    public function signUp(
         Request $request,
         SerializerInterface $serializer,
         GeneratorService $generator,
@@ -44,6 +44,11 @@ class RegistrationController extends AbstractController
     ): Response {
         try {
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
+
+            // Ensure that email is not already used
+            if ($userRepository->findOneBy(['email' => $user->getEmail()])) {
+                return $this->json(['errors' => ['email' => ['Cette adresse email est déjà utilisée']]], Response::HTTP_BAD_REQUEST);
+            }
 
             // Ensure that first name & last name are capitalized
             $user->setFirstName(ucfirst($user->getFirstName()));
