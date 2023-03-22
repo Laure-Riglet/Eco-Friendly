@@ -26,3 +26,5 @@
 /.vscode/
 
 /config/jwt/*.pem
+/docs/
+
