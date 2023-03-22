@@ -82,6 +82,17 @@ class Category
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 10, max = 255)
+     * @Assert\NotBlank
+     * @Groups({"articles"})
+     * @Groups({"advices"})
+     * @Groups({"users"})
+     * @Groups({"categories"})
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -233,5 +244,17 @@ class Category
     public function isIsActive(): ?bool
     {
         return $this->is_active;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
     }
 }

@@ -36,10 +36,10 @@ class AppFixtures extends Fixture
         // ! Adding Categories
 
         $categories = [
-            'Mobilité',
             'Maison',
             'Santé',
-            'Energie',
+            'Mobilité',
+            'Alimentation',
         ];
 
         foreach ($categories as $categoryName) {
@@ -47,6 +47,7 @@ class AppFixtures extends Fixture
             $category->setName($categoryName);
             $category->setTagline($faker->sentence(6, true));
             $category->setSlug($this->slugger->slugify($categoryName));
+            $category->setPicture('https://cdn.eco-friendly.fr/assets/img/categories/' . $this->slugger->slugify($categoryName) . '.webp');
             $category->setCreatedAt(new DateTimeImmutable());
             $category->setIsActive(true);
             $manager->persist($category);
@@ -135,7 +136,7 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setPassword($passwordHasher->hashPassword($user, $faker->password));
             $user->setRoles(['ROLE_AUTHOR']);
-            $user->setPassword($faker->password(8, 12));
+            $user->setPassword($passwordHasher->hashPassword($user, $faker->password(8, 12)));
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
             $user->setNickname($faker->userName());
@@ -153,7 +154,7 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setPassword($passwordHasher->hashPassword($user, $faker->password));
             $user->setRoles(['ROLE_USER']);
-            $user->setPassword($faker->password(8, 12));
+            $user->setPassword($passwordHasher->hashPassword($user, $faker->password(8, 12)));
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
             $user->setNickname($faker->userName());
@@ -279,7 +280,7 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setPassword($passwordHasher->hashPassword($user, $faker->password));
             $user->setRoles(['ROLE_USER']);
-            $user->setPassword($faker->password(8, 12));
+            $user->setPassword($passwordHasher->hashPassword($user, $faker->password(8, 12)));
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
             $user->setNickname($faker->userName());
@@ -298,7 +299,7 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setPassword($passwordHasher->hashPassword($user, $faker->password));
             $user->setRoles(['ROLE_USER']);
-            $user->setPassword($faker->password(8, 12));
+            $user->setPassword($passwordHasher->hashPassword($user, $faker->password(8, 12)));
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
             $user->setNickname($faker->userName());
