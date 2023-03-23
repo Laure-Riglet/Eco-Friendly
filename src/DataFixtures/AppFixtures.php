@@ -3,9 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Advice;
+use App\Entity\Answer;
 use App\Entity\Article;
 use App\Entity\Avatar;
 use App\Entity\Category;
+use App\Entity\Quiz;
 use App\Entity\User;
 use App\Service\GeneratorService;
 use App\Service\SluggerService;
@@ -216,6 +218,33 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         echo 'Articles added !' . PHP_EOL;
+
+        // ! Adding Quizzes & Answers
+
+        $articles = $manager->getRepository(Article::class)->findAll();
+        $trueOrFalse = [1, 0, 0, 0];
+
+        foreach ($articles as $article) {
+            $quiz = new Quiz();
+            $quiz->setQuestion(substr_replace($faker->sentence(rand(8, 15), true), " ?", -1));
+            $quiz->setArticle($article);
+            $quiz->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
+            $quiz->setUpdatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
+            $manager->persist($quiz);
+            shuffle($trueOrFalse);
+            for ($index = 0; $index < 4; $index++) {
+                $answer = new Answer();
+                $answer->setContent($faker->sentence(rand(4, 10), true));
+                $answer->setQuiz($quiz);
+                $answer->setCorrect($trueOrFalse[$index]);
+                $answer->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
+                $answer->setUpdatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
+                $manager->persist($answer);
+            }
+        }
+
+        $manager->flush();
+        echo 'Quizzes and their answers added !' . PHP_EOL;
 
         // ! Adding Advices
 

@@ -6,6 +6,7 @@ use App\Repository\QuizRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=QuizRepository::class)
@@ -16,38 +17,44 @@ class Quiz
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"quizzes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"quizzes"})
      */
     private $question;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="quizzes")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"quizzes"})
+     */
+    private $article;
+
+    /**
      * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="quiz", orphanRemoval=true)
+     * @Groups({"quizzes"})
      */
     private $answers;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="quizzes")
-     */
-    private $categories;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"quizzes"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"quizzes"})
      */
     private $updated_at;
 
     public function __construct()
     {
         $this->answers = new ArrayCollection();
-        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +92,18 @@ class Quiz
         return $this;
     }
 
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
     public function removeAnswer(Answer $answer): self
     {
         if ($this->answers->removeElement($answer)) {
@@ -93,30 +112,6 @@ class Quiz
                 $answer->setQuiz(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        $this->categories->removeElement($category);
 
         return $this;
     }

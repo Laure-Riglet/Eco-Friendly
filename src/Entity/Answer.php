@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AnswerRepository::class)
@@ -14,11 +15,13 @@ class Answer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"quizzes"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"quizzes"})
      */
     private $content;
 
@@ -30,16 +33,19 @@ class Answer
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"quizzes"})
      */
     private $correct;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"quizzes"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"quizzes"})
      */
     private $updated_at;
 

@@ -24,6 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $id;
 
@@ -34,6 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $email;
 
@@ -62,6 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $firstname;
 
@@ -73,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $lastname;
 
@@ -84,6 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $nickname;
 
@@ -94,6 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $code;
 
@@ -105,6 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"articles"})
      * @Groups({"advices"})
      * @Groups({"users"})
+     * @Groups({"quizzes"})
      */
     private $avatar;
 

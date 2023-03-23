@@ -39,28 +39,46 @@ class QuizRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Quiz[] Returns an array of Quiz objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('q')
-//            ->andWhere('q.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('q.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findRandom()
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->join('q.article', 'ar')
+            ->where('ar.status = :status')
+            ->setParameter('status', 1);
+        $count = $qb->select('COUNT(q.id)')->getQuery()->getSingleScalarResult();
+        $offset = rand(0, $count - 1);
 
-//    public function findOneBySomeField($value): ?Quiz
-//    {
-//        return $this->createQueryBuilder('q')
-//            ->andWhere('q.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $this->createQueryBuilder('q')
+            ->join('q.article', 'ar')
+            ->where('ar.status = :status')
+            ->setParameter('status', 1)->setMaxResults(1)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
+    //    /**
+    //     * @return Quiz[] Returns an array of Quiz objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('q')
+    //            ->andWhere('q.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('q.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Quiz
+    //    {
+    //        return $this->createQueryBuilder('q')
+    //            ->andWhere('q.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

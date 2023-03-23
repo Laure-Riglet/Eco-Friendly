@@ -22,6 +22,7 @@ class Category
      * @Groups({"advices"})
      * @Groups({"users"})
      * @Groups({"categories"})
+     * @Groups({"quizzes"})
      */
     private $id;
 
@@ -33,6 +34,7 @@ class Category
      * @Groups({"advices"})
      * @Groups({"users"})
      * @Groups({"categories"})
+     * @Groups({"quizzes"})
      */
     private $name;
 
@@ -44,6 +46,7 @@ class Category
      * @Groups({"advices"})
      * @Groups({"users"})
      * @Groups({"categories"})
+     * @Groups({"quizzes"})
      */
     private $tagline;
 
@@ -54,6 +57,7 @@ class Category
      * @Groups({"advices"})
      * @Groups({"users"})
      * @Groups({"categories"})
+     * @Groups({"quizzes"})
      */
     private $slug;
 
@@ -93,16 +97,10 @@ class Category
      */
     private $picture;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Quiz::class, mappedBy="categories")
-     */
-    private $quizzes;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->advices = new ArrayCollection();
-        $this->quizzes = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -260,33 +258,6 @@ class Category
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Quiz>
-     */
-    public function getQuizzes(): Collection
-    {
-        return $this->quizzes;
-    }
-
-    public function addQuiz(Quiz $quiz): self
-    {
-        if (!$this->quizzes->contains($quiz)) {
-            $this->quizzes[] = $quiz;
-            $quiz->addCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuiz(Quiz $quiz): self
-    {
-        if ($this->quizzes->removeElement($quiz)) {
-            $quiz->removeCategory($this);
-        }
 
         return $this;
     }
