@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+<<<<<<< HEAD
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+=======
+>>>>>>> develop
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +23,7 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $id;
 
@@ -26,6 +32,7 @@ class Article
      * @Assert\Length(min = 1, max = 128)
      * @Assert\NotBlank
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $title;
 
@@ -40,6 +47,7 @@ class Article
      * @ORM\Column(type="string", length=128)
      * @Assert\Length(min = 1, max = 128)
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $slug;
 
@@ -48,6 +56,7 @@ class Article
      * @Assert\Length(min = 10, max = 255)
      * @Assert\NotBlank
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $picture;
 
@@ -56,6 +65,7 @@ class Article
      * @Assert\Range(min = 0, max = 2)
      * @Assert\NotBlank
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $status;
 
@@ -77,6 +87,7 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $author;
 
@@ -85,8 +96,19 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      * @Groups({"articles"})
+     * @Groups({"quizzes"})
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Quiz::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $quizzes;
+
+    public function __construct()
+    {
+        $this->quizzes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -197,6 +219,36 @@ class Article
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quiz>
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes[] = $quiz;
+            $quiz->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getArticle() === $this) {
+                $quiz->setArticle(null);
+            }
+        }
 
         return $this;
     }

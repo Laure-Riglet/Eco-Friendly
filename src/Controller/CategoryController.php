@@ -71,7 +71,9 @@ class CategoryController extends AbstractController
      */
     public function edit(Request $request, SluggerService $slugger, Category $category, CategoryRepository $categoryRepository): Response
     {
+        $originalCategory = clone $category;
         $form = $this->createForm(CategoryType::class, $category);
+        $category->setPicture($originalCategory->getPicture());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
