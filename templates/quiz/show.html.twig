@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block name %}{{ category.name }} | Eco Friendly{% endblock %}
+{% block name %}{{ quiz.content }} | Eco Friendly{% endblock %}
 
 {% block body %}
 
     {% include "_fragments/_flash_message.html.twig" %}
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Détails de la catégorie</h1>
+        <h1>Détails du quiz</h1>
     </div>
     
     <div class="container-fluid">
@@ -21,8 +21,17 @@
                             <div class="row g-0">
                                 <div class="col-md-12">
                                     <div class="card-body">
-                                        <h1 class="card-name">{{ category.name }}</h1>
-                                        <p class="card-text">{{ category.tagline }}</p>
+                                        <h1 class="card-name">Question : {{ quiz.question }}</h1>
+                                        <p class="card-text">
+                                            <h5>Réponses :</h5>
+                                            {% for answer in quiz.answers %}
+                                            {% if answer.isCorrect %}
+                                            <h5><i class="text-success bi bi-clipboard2-check-fill"></i> {{ answer.content }}</h5>
+                                            {% else %}
+                                            <h5><i class="text-danger bi bi-clipboard2-x-fill"></i> {{ answer.content }}</h5>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -35,21 +44,21 @@
             <div class="col-md-3">
                 <div class="card bg-light mb-3">
                     <div class="card-body text-center">
-                        <h6 class="card-subname mb-2 text-muted">Cr&eacute;&eacute;e le {{ category.createdAt|date('d-m-Y H:i:s') }}</h6>
+                        <h6 class="card-subname mb-2 text-muted">Cr&eacute;&eacute; le {{ quiz.createdAt|date('d-m-Y H:i:s') }}</h6>
                         <p class="card-text">
                             Status : 
-                            {% include "_fragments/_category_active_tag.html.twig" with {status:category.isActive} %}
+                            {% include "_fragments/_content_status_tag.html.twig" with {status:quiz.status} %}
                         </p>       
                         <div class="d-flex flex-nowrap justify-content-end align-items-center">
-                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" name="&Eacute;diter" href="{{ path('bo_categories_edit', {'id': category.id}) }}"><i class="bi bi-pencil"></i></a>
-                            <form method="post" action="{{ path('bo_categories_deactivate', {'id': category.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver cette catégorie ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('deactivate' ~ category.id) }}" />
+                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" name="&Eacute;diter" href="{{ path('bo_quizzes_edit', {'id': quiz.id}) }}"><i class="bi bi-pencil"></i></a>
+                            <form method="post" action="{{ path('bo_quizzes_deactivate', {'id': quiz.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver ce quiz ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('deactivate' ~ quiz.id) }}" />
                                 <button class="m-1 btn-sm btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" name="D&eacute;sactiver"><i class="bi bi-x-circle"></i></button>
                             </form>
                         </div>                    
                     </div>
                     <div class="card-footer bg-transparent text-center">
-                        <div class="float-right text-muted small">Mis à jour : {{ category.updatedAt ? category.updatedAt|date('d-m-Y H:i:s') : 'jamais' }}</div>
+                        <div class="float-right text-muted small">Mis à jour : {{ quiz.updatedAt ? quiz.updatedAt|date('d-m-Y H:i:s') : 'jamais' }}</div>
                     </div>
                 </div>
             </div>

@@ -35,7 +35,7 @@ class Quiz
     private $article;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="quiz", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="quiz", orphanRemoval=true, cascade={"persist"})
      * @Groups({"quizzes"})
      */
     private $answers;

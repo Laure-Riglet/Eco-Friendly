@@ -79,9 +79,9 @@
                             <h6 class="card-subtitle mb-2 text-muted">{{ quiz.question }}</h6>
                         </p>
                         <div class="d-flex flex-nowrap justify-content-end align-items-center">
-                            <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
+                            <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_quizzes_show', {id:quiz.id}) }}"><i class="bi bi-eye"></i></a>
                             {% if not quiz.status is same as 2  or is_granted('ROLE_ADMIN') %}
-                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_quizzes_edit', {id:quiz.id}) }}"><i class="bi bi-pencil"></i></a>
                             {% endif %}
                             {% include "_fragments/_button_activate_article.html.twig" %}
                         </div>                    
