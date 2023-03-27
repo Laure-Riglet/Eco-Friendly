@@ -52,12 +52,14 @@ class AdviceController extends AbstractController
             $advice = $serializer->deserialize($request->getContent(), Advice::class, 'json');
             $advice->setSlug($slugger->slugify($advice->getTitle()));
             $advice->setCreatedAt(new DateTimeImmutable());
+
             // Change of owning contributor has to be prevented
             $advice->setContributor($this->getUser());
         } catch (NotEncodableValueException $e) {
             return $this->json(['errors' => ['json' => ['Json non valide']]], Response::HTTP_BAD_REQUEST);
         }
 
+        // Adapt validation groups according to status
         if ($advice->getStatus() === 0) {
             $errors = $validator->validate($advice, null, ['Default']);
         }

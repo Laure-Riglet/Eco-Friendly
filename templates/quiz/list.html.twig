@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des quiz | Eco Friendly{% endblock %}
+
+{% block body %}
+
+{% include "_fragments/_flash_message.html.twig" %}
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Liste des quiz</h1>
+        <a class="btn btn-primary" href="{{ path('bo_quizzes_new') }}">Créer un quiz</a>
+    </div>
+    <div class="table-responsive-lg">
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Article lié</th>
+                    <th>Question et réponses</th>
+                    <th class="text-center">Statut</th>
+                    <th>Cr&eacute;&eacute;es le</th>
+                    <th>&Eacute;dit&eacute;es le</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for quiz in quizzes %}
+                <tr>
+                    <td>{{ quiz.id }}</td>
+                    <td>{{ quiz.article.title }}</td>
+                    <td>{{ quiz.question }}
+                        <ul>
+                        
+                        </ul>
+                    </td>
+                    {# <td class="text-center">
+                        {% include "_fragments/_quiz_active_tag.html.twig" with {status:quiz.isActive} %}
+                    </td> #}
+                    <td>{{ quiz.createdAt|date('d-m-Y H:i:s') }}</td>
+                    <td>{{ quiz.updatedAt ? quiz.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                    <td class="d-flex flex-nowrap justify-content-center">
+                        {# <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_quizzes_show', {'id': quiz.id}) }}"><i class="bi bi-eye"></i></a>
+                        <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_quizzes_edit', {'id': quiz.id}) }}"><i class="bi bi-pencil"></i></a>
+                    {% include "_fragments/_button_activate_quiz.html.twig"%} #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun quiz trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -97,7 +97,6 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/categories/{id}/desactiver", name="bo_categories_deactivate", requirements={"id":"\d+"}, methods={"POST"})
-    
      */
     public function deactivate(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {

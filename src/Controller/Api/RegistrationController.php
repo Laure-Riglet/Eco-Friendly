@@ -121,6 +121,7 @@ class RegistrationController extends AbstractController
         return $this->json(['nickname' => $user->getNickname(), 'email' => $user->getEmail()], Response::HTTP_OK);
     }
 
+    // This route is used by the email verification system
     /**
      * @Route("/verify/email", name="api_verify_email")
      */
@@ -129,13 +130,13 @@ class RegistrationController extends AbstractController
         $id = $request->get('id');
 
         if (!$id) {
-            return $this->redirectToRoute('app_root');
+            return $this->redirect('https://eco-friendly.fr/404');
         }
 
         $user = $userRepository->find($id);
 
         if (!$user) {
-            return $this->redirectToRoute('app_root');
+            return $this->redirect('https://eco-friendly.fr/404');
         }
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);

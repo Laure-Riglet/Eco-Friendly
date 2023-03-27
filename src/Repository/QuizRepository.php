@@ -44,6 +44,8 @@ class QuizRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('q')
             ->join('q.article', 'ar')
             ->where('ar.status = :status')
+            ->setParameter('status', 1)
+            ->andWhere('q.status = :status')
             ->setParameter('status', 1);
         $count = $qb->select('COUNT(q.id)')->getQuery()->getSingleScalarResult();
         $offset = rand(0, $count - 1);
@@ -51,7 +53,10 @@ class QuizRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('q')
             ->join('q.article', 'ar')
             ->where('ar.status = :status')
-            ->setParameter('status', 1)->setMaxResults(1)
+            ->setParameter('status', 1)
+            ->andWhere('q.status = :status')
+            ->setParameter('status', 1)
+            ->setMaxResults(1)
             ->setFirstResult($offset)
             ->getQuery()
             ->getResult();

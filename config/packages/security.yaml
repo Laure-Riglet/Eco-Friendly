@@ -31,7 +31,6 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                # "app_login" is the name of the route created previously
                 login_path: bo_security_login
                 check_path: bo_security_login
                 default_target_path: bo_home

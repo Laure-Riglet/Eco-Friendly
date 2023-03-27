@@ -41,6 +41,16 @@ class Quiz
     private $answers;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $status;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"quizzes"})
      */
@@ -51,11 +61,6 @@ class Quiz
      * @Groups({"quizzes"})
      */
     private $updated_at;
-
-    public function __construct()
-    {
-        $this->answers = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -112,6 +117,18 @@ class Quiz
                 $answer->setQuiz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
