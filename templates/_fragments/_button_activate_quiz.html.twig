@@ -1,0 +1,12 @@
+{% if not quiz.status is same as 2 %}
+    <form method="post" action="{{ path('bo_quizzes_deactivate', {'id': quiz.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver ce quiz ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('deactivate' ~ quiz.id) }}" />
+    <button class="m-1 btn-sm btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="D&eacute;sactiver"><i class="bi bi-x-circle"></i></button>
+    </form>
+{% elseif is_granted('ROLE_ADMIN') and quiz.status is same as 2 %}
+    <form method="post" action="{{ path('bo_quizzes_reactivate', {'id': quiz.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir réactiver ce quiz ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('reactivate' ~ quiz.id) }}" />
+    <button class="m-1 btn-sm btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Réactiver"><i class="bi bi-arrow-clockwise"></i></button>
+    </form>
+{% endif %}
+  

@@ -34,7 +34,6 @@
                     <th>Contenu</th>
                     <th>Auteur</th>
                     <th class="text-center">Image</th>
-                    <th class="text-center">Quiz</th>
                     <th class="text-center">Catégorie</th>
                     <th class="text-center">Statut</th>
                     <th>Créé le</th>
@@ -50,7 +49,6 @@
                     <td>{{ article.content|slice(0, 100)|striptags }} [...]</td>
                     <td>{{ article.author.firstname }} {{ article.author.lastname }}</td>
                     <td class="text-center"><img src="{{ article.picture }}" alt="{{ article.slug }}" style="max-width: 80px; max-height: 80px;" /></td>
-                    <td class="text-center">{{ article.quizzes is not empty ? 'Oui' : 'Non' }}</td>
                     <td class="text-center">{{ article.category.name }}</td>
                     <td class="text-center">
                         {% include "_fragments/_content_status_tag.html.twig" with {status:article.status} %}

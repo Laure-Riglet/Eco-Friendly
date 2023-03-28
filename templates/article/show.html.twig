@@ -83,7 +83,7 @@
                             {% if not quiz.status is same as 2  or is_granted('ROLE_ADMIN') %}
                             <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_quizzes_edit', {id:quiz.id}) }}"><i class="bi bi-pencil"></i></a>
                             {% endif %}
-                            {% include "_fragments/_button_activate_article.html.twig" %}
+                            {% include "_fragments/_button_activate_quiz.html.twig" %}
                         </div>                    
                     </div>
                     {% endfor %}
