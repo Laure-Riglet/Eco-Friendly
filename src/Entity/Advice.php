@@ -25,8 +25,8 @@ class Advice
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=128, unique=true)
-     * @Assert\Length(max = 128)
+     * @ORM\Column(type="string", length=64, unique=true)
+     * @Assert\Length(max = 64)
      * @Assert\NotBlank
      * @Groups({"advices"})
      * @Groups({"users"})
@@ -43,8 +43,8 @@ class Advice
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=148, unique=true)
-     * @Assert\Length(max = 148)
+     * @ORM\Column(type="string", length=80, unique=true)
+     * @Assert\Length(max = 80)
      * @Groups({"advices"})
      * @Groups({"users"})
      */

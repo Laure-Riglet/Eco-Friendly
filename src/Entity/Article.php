@@ -25,8 +25,8 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\Length(min = 1, max = 128)
+     * @ORM\Column(type="string", length=64)
+     * @Assert\Length(min = 1, max = 64)
      * @Assert\NotBlank
      * @Groups({"articles"})
      * @Groups({"quizzes"})
@@ -41,8 +41,8 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     * @Assert\Length(min = 1, max = 128)
+     * @ORM\Column(type="string", length=80)
+     * @Assert\Length(min = 1, max = 80)
      * @Groups({"articles"})
      * @Groups({"quizzes"})
      */

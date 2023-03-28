@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cr&eacute;er un quiz | Eco-Friendly{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid col-12 col-lg-8 mx-auto">
+        <h1>Cr&eacute;er un quiz</h1>
+        <div class="row mb-3">
+            {{ include('category/_form.html.twig', {'button_label': 'Valider'}) }}
+        </div>
+        <a href="{{ path('bo_categories_list') }}">Retour à la liste</a>
+    </div>
+
+{% endblock %}

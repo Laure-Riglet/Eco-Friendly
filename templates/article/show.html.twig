@@ -36,6 +36,7 @@
 
             <!-- Left Sidebar -->
             <div class="col-md-3">
+                <!-- Article information -->
                 <div class="card bg-light mb-3">
                     <div class="card-header d-flex flex-column justify-content-center align-items-center">
                         <p>Auteur :</p>
@@ -52,7 +53,7 @@
                             {% include "_fragments/_content_status_tag.html.twig" with {status:article.status} %}
                         </p>
                         <p class="card-text">
-                            Categorie : <span class="badge bg-info mb-2">{{ article.category.name }}</span>
+                            Catégorie : <span class="badge bg-info mb-2">{{ article.category.name }}</span>
                         </p>         
                         <div class="d-flex flex-nowrap justify-content-end align-items-center">
                             {% if not article.status is same as 2  or is_granted('ROLE_ADMIN') %}
@@ -63,6 +64,32 @@
                     </div>
                     <div class="card-footer bg-transparent text-center">
                         <div class="float-right text-muted small">Mis à jour : {{ article.author.updatedAt ? article.author.updatedAt|date('d-m-Y H:i:s') : 'jamais' }}</div>
+                    </div>
+                </div>
+                <!-- Quizzes related -->
+                <div class="card bg-light">
+                    <div class="card-header d-flex flex-column justify-content-center align-items-center">
+                        Quiz associé(s) : {{ article.quizzes|length }}
+                    </div>
+                    {% if article.quizzes|length > 0 %}
+                    {% for quiz in article.quizzes %}
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                            {% include "_fragments/_content_status_tag.html.twig" with {status:quiz.status} %}
+                            <h6 class="card-subtitle mb-2 text-muted">{{ quiz.question }}</h6>
+                        </p>
+                        <div class="d-flex flex-nowrap justify-content-end align-items-center">
+                            <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_quizzes_show', {id:quiz.id}) }}"><i class="bi bi-eye"></i></a>
+                            {% if not quiz.status is same as 2  or is_granted('ROLE_ADMIN') %}
+                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_quizzes_edit', {id:quiz.article.id, quiz_id:quiz.id}) }}"><i class="bi bi-pencil"></i></a>
+                            {% endif %}
+                            {% include "_fragments/_button_activate_quiz.html.twig" %}
+                        </div>                    
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="card-footer bg-transparent text-center">
+                        <a class="btn btn-primary" href="{{ path('bo_quizzes_new', {id:article.id}) }}">Ajouter un quiz</a>
                     </div>
                 </div>
             </div>

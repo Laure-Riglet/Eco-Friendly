@@ -1,0 +1,18 @@
+<form 
+    method="post" 
+    action="{{ path('bo_quizzes_deactivate', {'id': quiz.id}) }}" 
+    onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver ce quiz ?');"
+    class="d-flex justify-content-start align-items-center"
+>
+    <input 
+        type="hidden" 
+        name="_token" 
+        value="{{ csrf_token('deactivate' ~ quiz.id) }}"
+    >
+    <button 
+        type="submit"
+        class="btn btn-danger my-2"
+    >
+            Désactiver
+    </button>
+</form>

@@ -60,8 +60,7 @@ class ResetPasswordController extends AbstractController
 
     /**
      * Confirmation page after a user has requested a password reset.
-     *
-     * @Route("/reset-password/check-email", name="app_check_email")
+     * @Route("/reset-password/check-email", name="bo_check_email")
      */
     public function checkEmail(): Response
     {
@@ -79,7 +78,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Validates and process the reset URL that the user clicked in their email.
      *
-     * @Route("/reset-password/reset/{token}", name="app_reset_password")
+     * @Route("/reset-password/reset/{token}", name="bo_reset_password")
      */
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
@@ -88,7 +87,7 @@ class ResetPasswordController extends AbstractController
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
             $this->storeTokenInSession($token);
 
-            return $this->redirectToRoute('app_reset_password');
+            return $this->redirectToRoute('bo_reset_password');
         }
 
         $token = $this->getTokenFromSession();
@@ -144,7 +143,7 @@ class ResetPasswordController extends AbstractController
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
-            return $this->redirectToRoute('app_check_email');
+            return $this->redirectToRoute('bo_check_email');
         }
 
         try {
@@ -160,7 +159,7 @@ class ResetPasswordController extends AbstractController
             //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             // ));
 
-            return $this->redirectToRoute('app_check_email');
+            return $this->redirectToRoute('bo_check_email');
         }
 
         $email = (new TemplatedEmail())
@@ -177,6 +176,6 @@ class ResetPasswordController extends AbstractController
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
-        return $this->redirectToRoute('app_check_email');
+        return $this->redirectToRoute('bo_check_email');
     }
 }

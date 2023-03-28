@@ -112,7 +112,7 @@ class ArticleController extends AbstractController
 
                 $extension = $pictureFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                    $this->addFlash('danger', 'Format d\'image non supporté');
+                    $this->addFlash('danger', 'Format d\'image non supporté.');
                     // return $this->redirectToRoute('bo_users_new');
                 }
 

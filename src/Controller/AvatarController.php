@@ -110,7 +110,7 @@ class AvatarController extends AbstractController
             $avatarRepository->add($avatar, true);
             $this->addFlash(
                 'success',
-                '"' . $avatar->getName() . '" a bien été modifié'
+                '"' . $avatar->getName() . '" a bien été modifié.'
             );
             return $this->redirectToRoute('bo_avatars_list', [], Response::HTTP_SEE_OTHER);
         }
