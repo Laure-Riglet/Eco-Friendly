@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Quiz;
-use App\Validator\Quiz as ValidatorQuiz;
+use App\Validator\Trivia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -17,7 +17,8 @@ class QuizType extends AbstractType
     {
         $builder
             ->add('question', TextType::class, [
-                'label' => 'Question'
+                'label' => 'Question',
+                'empty_data' => ''
             ])
             ->add('answers', CollectionType::class, [
                 'entry_type' => AnswerType::class,
@@ -39,7 +40,7 @@ class QuizType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Quiz::class,
-            'constraints' => new ValidatorQuiz()
+            'constraints' => new Trivia()
         ]);
     }
 }

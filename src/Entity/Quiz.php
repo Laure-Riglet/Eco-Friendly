@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=QuizRepository::class)
@@ -23,6 +24,8 @@ class Quiz
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\NotBlank(groups={"create"})
+     * @assert\Length(min=3, max=255, groups={"create"})
      * @Groups({"quizzes"})
      */
     private $question;
@@ -30,18 +33,23 @@ class Quiz
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="quizzes")
      * @ORM\JoinColumn(nullable=false)
+     * @assert\NotBlank
      * @Groups({"quizzes"})
      */
     private $article;
 
     /**
      * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="quiz", orphanRemoval=true, cascade={"persist"})
+     * @assert\NotBlank(groups={"create"})
+     * @assert\Count(min=4, max=4)
      * @Groups({"quizzes"})
      */
     private $answers;
 
     /**
      * @ORM\Column(type="integer")
+     * @assert\NotBlank(groups={"create"})
+     * @assert\Choice(choices={0, 1, 2}, groups={"create"})
      */
     private $status;
 

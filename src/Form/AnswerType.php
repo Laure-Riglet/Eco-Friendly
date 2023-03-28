@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Answer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Validator\Trivia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,7 +17,8 @@ class AnswerType extends AbstractType
     {
         $builder
             ->add('content', TextType::class, [
-                'label' => 'Réponse'
+                'label' => 'Réponse',
+                'empty_data' => ''
             ])
             ->add('correct', ChoiceType::class, [
                 'choices' => [
@@ -31,7 +32,7 @@ class AnswerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Answer::class,
+            'data_class' => Answer::class
         ]);
     }
 }

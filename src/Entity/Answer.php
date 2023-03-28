@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AnswerRepository::class)
@@ -22,32 +23,25 @@ class Answer
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"quizzes"})
+     * @assert\NotBlank
+     * @assert\Length(min=3, max=255)
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=Quiz::class, inversedBy="answers")
      * @ORM\JoinColumn(nullable=false)
+     * @assert\NotBlank
      */
     private $quiz;
 
     /**
      * @ORM\Column(type="boolean")
+     * @assert\NotBlank
+     * @assert\Type("bool")
      * @Groups({"quizzes"})
      */
     private $correct;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     * @Groups({"quizzes"})
-     */
-    private $created_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
-     * @Groups({"quizzes"})
-     */
-    private $updated_at;
 
     public function __toString()
     {
@@ -91,30 +85,6 @@ class Answer
     public function setCorrect(bool $correct): self
     {
         $this->correct = $correct;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }

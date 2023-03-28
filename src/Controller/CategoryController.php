@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'La catégorie "' . $category->getName() . '" a bien été ajoutée'
+                'La catégorie "' . $category->getName() . '" a bien été ajoutée.'
             );
 
             return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
             $categoryRepository->add($category, true);
             $this->addFlash(
                 'success',
-                'La catégorie "' . $category->getName() . '" a bien été modifiée'
+                'La catégorie "' . $category->getName() . '" a bien été modifiée.'
             );
 
             return $this->redirectToRoute('bo_categories_list', [], Response::HTTP_SEE_OTHER);

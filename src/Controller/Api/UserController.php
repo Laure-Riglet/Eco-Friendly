@@ -123,7 +123,7 @@ class UserController extends AbstractController
 
         // Check if the email is already used by another user
         if ($userRepository->findOneBy(['email' => $email])) {
-            return $this->json(['errors' => ['email' => ['Cet email est déjà utilisé']]], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->json(['errors' => ['email' => ['Cet email est déjà utilisé.']]], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $user->setEmail($email);
@@ -169,7 +169,7 @@ class UserController extends AbstractController
         // Check if the file is an image and if it's a supported format
         $extension = $avatar->guessExtension();
         if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-            return $this->json(['errors' => ['picture' => ['Format d\'image non supporté']]], Response::HTTP_BAD_REQUEST);
+            return $this->json(['errors' => ['picture' => ['Format d\'image non supporté.']]], Response::HTTP_BAD_REQUEST);
         }
 
         $filename = $user->getId() . '-' . uniqid() . '.' . $extension;

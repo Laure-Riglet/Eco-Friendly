@@ -50,11 +50,8 @@
                             {% include "_fragments/_content_status_tag.html.twig" with {status:quiz.status} %}
                         </p>       
                         <div class="d-flex flex-nowrap justify-content-end align-items-center">
-                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" name="&Eacute;diter" href="{{ path('bo_quizzes_edit', {'id': quiz.id}) }}"><i class="bi bi-pencil"></i></a>
-                            <form method="post" action="{{ path('bo_quizzes_deactivate', {'id': quiz.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir désactiver ce quiz ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('deactivate' ~ quiz.id) }}" />
-                                <button class="m-1 btn-sm btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" name="D&eacute;sactiver"><i class="bi bi-x-circle"></i></button>
-                            </form>
+                            <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" name="&Eacute;diter" href="{{ path('bo_quizzes_edit', {id:quiz.article.id, quiz_id:quiz.id}) }}"><i class="bi bi-pencil"></i></a>
+                            {% include "_fragments/_button_activate_quiz.html.twig" %}
                         </div>                    
                     </div>
                     <div class="card-footer bg-transparent text-center">

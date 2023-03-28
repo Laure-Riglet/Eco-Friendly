@@ -6,9 +6,10 @@ use App\Entity\Answer;
 use App\Entity\Article;
 use App\Entity\Quiz;
 use App\Form\QuizType;
+use App\Repository\AnswerRepository;
 use App\Repository\QuizRepository;
-use App\Service\SluggerService;
 use DateTimeImmutable;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,28 +39,20 @@ class QuizController extends AbstractController
         $quiz->setArticle($article);
 
         $answer1 = new Answer();
-        $answer1->setContent("");
         $answer1->setQuiz($quiz);
-        $answer1->setCreatedAt(new DatetimeImmutable());
         $quiz->getAnswers()->add($answer1);
         $answer2 = new Answer();
-        $answer2->setContent("");
         $answer2->setQuiz($quiz);
-        $answer2->setCreatedAt(new DatetimeImmutable());
         $quiz->getAnswers()->add($answer2);
         $answer3 = new Answer();
-        $answer3->setContent("");
         $answer3->setQuiz($quiz);
-        $answer3->setCreatedAt(new DatetimeImmutable());
         $quiz->getAnswers()->add($answer3);
         $answer4 = new Answer();
-        $answer4->setContent("");
         $answer4->setQuiz($quiz);
-        $answer4->setCreatedAt(new DatetimeImmutable());
         $quiz->getAnswers()->add($answer4);
 
         $form = $this->createForm(QuizType::class, $quiz);
-        $form->handleRequest($request, null, ['validation_groups' => ['Default']]);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $quiz->setCreatedAt(new DateTimeImmutable());
@@ -90,26 +83,24 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("/quiz/{id}/editer", name="bo_quizzes_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @Route("/articles/{id}/quiz/{quiz_id}/editer", name="bo_quizzes_edit", requirements={"id":"\d+"}, methods={"GET", "POST"})
+     * @ParamConverter("quiz", class="App\Entity\Quiz", options={"id" = "quiz_id"})
      */
-    public function edit(Request $request, Quiz $quiz, QuizRepository $quizRepository): Response
+    public function edit(Request $request, Article $article, Quiz $quiz, QuizRepository $quizRepository, AnswerRepository $answerRepository): Response
     {
-        $originalQuiz = clone $quiz;
         $form = $this->createForm(QuizType::class, $quiz);
-        $quiz->setPicture($originalQuiz->getPicture());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $quiz->setSlug($slugger->slugify($quiz->getQuestion()));
-            $quiz->setUpdatedAt(new DateTimeImmutable());
             $quizRepository->add($quiz, true);
+
             $this->addFlash(
                 'success',
-                'Le quiz "' . $quiz->getQuestion() . '" a bien été modifiée'
+                'Le quiz "' . $quiz->getQuestion() . '" a bien été modifié.'
             );
 
-            return $this->redirectToRoute('bo_articles_show', ['id' => $quiz->getArticle()->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('bo_articles_show', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('quiz/edit.html.twig', [
@@ -131,7 +122,7 @@ class QuizController extends AbstractController
 
         $this->addFlash(
             'danger',
-            'Le quiz "' . $quiz->getQuestion() . '" a bien été désactivée.'
+            'Le quiz "' . $quiz->getQuestion() . '" a bien été désactivé.'
         );
         return $this->redirectToRoute('bo_articles_show', ['id' => $quiz->getArticle()->getId()], Response::HTTP_SEE_OTHER);
     }
@@ -149,7 +140,7 @@ class QuizController extends AbstractController
         }
         $this->addFlash(
             'success',
-            'Le quiz "' . $quiz->getQuestion() . '" a bien été réactivée.'
+            'Le quiz "' . $quiz->getQuestion() . '" a bien été réactivé.'
         );
 
         return $this->redirectToRoute('bo_articles_show', ['id' => $quiz->getArticle()->getId()], Response::HTTP_SEE_OTHER);

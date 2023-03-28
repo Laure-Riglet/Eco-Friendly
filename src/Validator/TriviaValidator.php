@@ -3,12 +3,11 @@
 namespace App\Validator;
 
 use App\Entity\Quiz;
-use App\Validator\Quiz as ValidatorQuiz;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-class QuizValidator extends ConstraintValidator
+class TriviaValidator extends ConstraintValidator
 {
     /**
      * @param Quiz $quiz
@@ -19,13 +18,11 @@ class QuizValidator extends ConstraintValidator
             throw new UnexpectedValueException($quiz, Quiz::class);
         }
 
-        if (!$constraint instanceof ValidatorQuiz) {
-            throw new UnexpectedValueException($constraint, ValidatorQuiz::class);
+        if (!$constraint instanceof Trivia) {
+            throw new UnexpectedValueException($constraint, Trivia::class);
         }
 
-        // Get the quiz data to validate
         $question = $quiz->getQuestion();
-        $status = $quiz->getStatus();
         $answers = $quiz->getAnswers();
 
         // Check if the question is empty
@@ -80,13 +77,6 @@ class QuizValidator extends ConstraintValidator
         if ($correctAnswersNb > 1) {
             $this->context->buildViolation($constraint->tooManyCorrectAnswers)
                 ->atPath('answers')
-                ->addViolation();
-        }
-
-        // Check if the status is empty
-        if (empty($status)) {
-            $this->context->buildViolation($constraint->statusIsEmpty)
-                ->atPath('status')
                 ->addViolation();
         }
     }

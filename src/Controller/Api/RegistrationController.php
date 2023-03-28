@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
 
             // Ensure that email is not already used
             if ($userRepository->findOneBy(['email' => $user->getEmail()])) {
-                return $this->json(['errors' => ['email' => ['Cette adresse email est déjà utilisée']]], Response::HTTP_BAD_REQUEST);
+                return $this->json(['errors' => ['email' => ['Cette adresse email est déjà utilisée.']]], Response::HTTP_BAD_REQUEST);
             }
 
             // Ensure that first name & last name are capitalized

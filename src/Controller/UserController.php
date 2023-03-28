@@ -135,7 +135,7 @@ class UserController extends AbstractController
             if ($avatarFile) {
                 $extension = $avatarFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                    $this->addFlash('danger', 'Format d\'image non supporté');
+                    $this->addFlash('danger', 'Format d\'image non supporté.');
                 }
 
                 $filename = $user->getId() . '-' . uniqid() . '.' . $extension;
@@ -244,7 +244,7 @@ class UserController extends AbstractController
             if ($avatarFile) {
                 $extension = $avatarFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                    $this->addFlash('danger', 'Format d\'image non supporté');
+                    $this->addFlash('danger', 'Format d\'image non supporté.');
                 }
 
                 $filename = $user->getId() . '-' . uniqid() . '.' . $extension;
@@ -324,7 +324,7 @@ class UserController extends AbstractController
             if ($avatarFile) {
                 $extension = $avatarFile->guessExtension();
                 if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
-                    $this->addFlash('danger', 'Format d\'image non supporté');
+                    $this->addFlash('danger', 'Format d\'image non supporté.');
                     // return $this->redirectToRoute('bo_users_new');
                 }
 
