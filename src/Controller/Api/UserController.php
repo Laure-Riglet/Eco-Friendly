@@ -63,7 +63,6 @@ class UserController extends AbstractController
             $user->setCode($originalUser->getCode());
             $user->setRoles($originalUser->getRoles());
             $user->setEmail($originalUser->getEmail());
-            $user->setAvatar($originalUser->getAvatar());
             $user->setPassword($originalUser->getPassword());
             $user->setIsActive($originalUser->isActive());
             $user->setIsVerified($originalUser->isVerified());

@@ -64,7 +64,7 @@ class ResetPasswordController extends AbstractController
                 ->from(new Address('no-reply@eco-friendly.fr', 'Eco-Friendly'))
                 ->to($user->getEmail())
                 ->subject('Réinitialisation de votre mot de passe')
-                ->htmlTemplate('reset_password/email.html.twig')
+                ->htmlTemplate('reset_password/email-api.html.twig')
                 ->context([
                     'resetToken' => $resetToken,
                 ]);

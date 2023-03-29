@@ -96,7 +96,7 @@ class AppFixtures extends Fixture
         $user->setLastname('Istrateur');
         $user->setNickname('NoSysAdmin');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/61-640e0f721e21b.png');
+        $user->setAvatar($avatars[array_rand($avatars)]);
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
@@ -104,14 +104,14 @@ class AppFixtures extends Fixture
         $manager->persist($user);
 
         $user = new User();
-        $user->setEmail('author@author.com');
+        $user->setEmail('camille.lambrecq@eco-friendly.fr');
         $user->setRoles(['ROLE_AUTHOR']);
-        $user->setPassword($passwordHasher->hashPassword($user, 'author'));
-        $user->setFirstname('Milan');
-        $user->setLastname('Kundera');
-        $user->setNickname('MilKuKu');
+        $user->setPassword($passwordHasher->hashPassword($user, 'L@mbr3cq'));
+        $user->setFirstname('Camille');
+        $user->setLastname('Lambrecq');
+        $user->setNickname('CamLam');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/3-6403a58bd869d.jpg');
+        $user->setAvatar($avatars[array_rand($avatars)]);
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
@@ -119,14 +119,14 @@ class AppFixtures extends Fixture
         $manager->persist($user);
 
         $user = new User();
-        $user->setEmail('user@user.com');
+        $user->setEmail('alban.care@gmail.com');
         $user->setRoles(['ROLE_USER']);
-        $user->setPassword($passwordHasher->hashPassword($user, 'user'));
-        $user->setFirstname('Jeff');
-        $user->setLastname('Lebowski');
-        $user->setNickname('The_Dude');
+        $user->setPassword($passwordHasher->hashPassword($user, '@lb@nC@r3'));
+        $user->setFirstname('Alban');
+        $user->setLastname('Caré');
+        $user->setNickname('Acare');
         $user->setCode($this->generator->codeGen());
-        $user->setAvatar('https://cdn.eco-friendly.fr/uploads/users/6-640e10d932757.jpg');
+        $user->setAvatar($avatars[array_rand($avatars)]);
         $user->setIsActive(1);
         $user->setIsVerified(1);
         $user->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
