@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Route(host="api.eco-friendly.localhost")
+ * @Route(host="api.eco-friendly.fr")
  */
 class HomeController extends AbstractController
 {

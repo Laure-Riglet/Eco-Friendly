@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 /**
- * @Route(host="api.eco-friendly.localhost")
+ * @Route(host="api.eco-friendly.fr")
  */
 class RegistrationController extends AbstractController
 {

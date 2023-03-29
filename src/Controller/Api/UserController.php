@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route(host="api.eco-friendly.localhost")
+ * @Route(host="api.eco-friendly.fr")
  */
 class UserController extends AbstractController
 {

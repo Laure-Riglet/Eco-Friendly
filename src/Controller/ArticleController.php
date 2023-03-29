@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route(host="backoffice.eco-friendly.localhost")
+ * @Route(host="backoffice.eco-friendly.fr")
  */
 class ArticleController extends AbstractController
 {
