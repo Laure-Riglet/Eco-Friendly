@@ -50,8 +50,7 @@ class TriviaValidator extends ConstraintValidator
             foreach ($answers as $answer) {
                 $contents[] = $answer->getContent();
             }
-
-            if (count($contents) !== 4) {
+            if (count(array_count_values($contents)) !== 4) {
                 $this->context->buildViolation($constraint->duplicateAnswers)
                     ->atPath('answers')
                     ->addViolation();
