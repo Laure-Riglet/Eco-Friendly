@@ -89,12 +89,12 @@ class AppFixtures extends Fixture
         $passwordHasher = $this->passwordHasher;
 
         $user = new User();
-        $user->setEmail('admin@admin.com');
+        $user->setEmail('laure.riglet@protonmail.com');
         $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword($passwordHasher->hashPassword($user, 'admin'));
-        $user->setFirstname('Admin');
-        $user->setLastname('Istrateur');
-        $user->setNickname('NoSysAdmin');
+        $user->setPassword($passwordHasher->hashPassword($user, 'L@ur3R!gl3t'));
+        $user->setFirstname('Laure');
+        $user->setLastname('Riglet');
+        $user->setNickname('L@ur3');
         $user->setCode($this->generator->codeGen());
         $user->setAvatar($avatars[array_rand($avatars)]);
         $user->setIsActive(1);
@@ -282,7 +282,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         echo 'Advices added !' . PHP_EOL;
-
+        /*
         // ! Adding items to test the 3 custom terminal commands
 
         // ! Adding Articles to test the articles illustration images dead links removal command
@@ -342,6 +342,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         echo 'Commands test items added !' . PHP_EOL;
+*/
 
         echo 'All done !' . PHP_EOL;
     }
