@@ -86,7 +86,7 @@ class Advice
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="advices")
      * @ORM\JoinColumn(nullable=true, name="category_id", referencedColumnName="id")
-     * @Assert\NotBlank(groups={"publish"})
+     * @Assert\NotBlank
      * @Groups({"advices"})
      * @Groups({"users"})
      */

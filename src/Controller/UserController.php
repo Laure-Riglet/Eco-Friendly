@@ -22,7 +22,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
- * @Route(host="backoffice.eco-friendly.fr")
+ * @Route(host="backoffice.eco-friendly.localhost")
  */
 class UserController extends AbstractController
 {

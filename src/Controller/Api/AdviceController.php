@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route(host="api.eco-friendly.fr")
+ * @Route(host="api.eco-friendly.localhost")
  */
 class AdviceController extends AbstractController
 {

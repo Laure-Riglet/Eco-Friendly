@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route(host="backoffice.eco-friendly.fr")
+ * @Route(host="backoffice.eco-friendly.localhost")
  */
 class SecurityController extends AbstractController
 {

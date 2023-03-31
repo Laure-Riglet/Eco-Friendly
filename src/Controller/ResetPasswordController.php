@@ -21,7 +21,7 @@ use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
- * @Route(host="backoffice.eco-friendly.fr")
+ * @Route(host="backoffice.eco-friendly.localhost")
  */
 class ResetPasswordController extends AbstractController
 {

@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(host="backoffice.eco-friendly.fr")
+ * @Route(host="backoffice.eco-friendly.localhost")
  */
 class AdviceController extends AbstractController
 {

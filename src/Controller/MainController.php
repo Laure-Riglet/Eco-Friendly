@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="api_root", methods={"GET"}, host="api.eco-friendly.fr")
+     * @Route("/", name="api_root", methods={"GET"}, host="api.eco-friendly.localhost")
      */
     public function apiRoot(): Response
     {
@@ -21,7 +21,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/v2", name="api_root_v2", methods={"GET"}, host="api.eco-friendly.fr")
+     * @Route("/v2", name="api_root_v2", methods={"GET"}, host="api.eco-friendly.localhost")
      */
     public function apiRootv2(): Response
     {
@@ -32,7 +32,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/", name="bo_root", methods={"GET"}, host="backoffice.eco-friendly.fr")
+     * @Route("/", name="bo_root", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function boRoot(): Response
     {
@@ -41,7 +41,7 @@ class MainController extends AbstractController
 
 
     /**
-     * @Route("/home", name="bo_home", methods={"GET"}, host="backoffice.eco-friendly.fr")
+     * @Route("/home", name="bo_home", methods={"GET"}, host="backoffice.eco-friendly.localhost")
      */
     public function home(EntityManagerInterface $entityManager): Response
     {

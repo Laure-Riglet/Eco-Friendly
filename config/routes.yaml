@@ -1,5 +1,5 @@
 # config/routes.yaml
 api_signin:
     path: /v2/signin
-    host: api.eco-friendly.fr
+    host: api.eco-friendly.localhost
     

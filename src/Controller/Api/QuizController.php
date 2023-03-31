@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route(host="api.eco-friendly.fr")
+ * @Route(host="api.eco-friendly.localhost")
  */
 class QuizController extends AbstractController
 {

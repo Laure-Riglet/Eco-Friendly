@@ -18,7 +18,7 @@ use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
- * @Route(host="api.eco-friendly.fr")
+ * @Route(host="api.eco-friendly.localhost")
  */
 class ResetPasswordController extends AbstractController
 {
@@ -35,7 +35,6 @@ class ResetPasswordController extends AbstractController
 
     /**
      * Endpoint to request a password reset.
-     *
      * @Route("/v2/reset-password", name="api_forgotpassword_request", methods={"POST"})
      */
     public function request(
@@ -57,7 +56,8 @@ class ResetPasswordController extends AbstractController
             try {
                 $resetToken = $this->resetPasswordHelper->generateResetToken($user);
             } catch (ResetPasswordExceptionInterface $e) {
-                return $this->json(['message' => 'Une erreur est survenue lors de la génération de l\'email de réinitialisation du mot de passe. Veuillez réessayer.'], Response::HTTP_INTERNAL_SERVER_ERROR);
+                // Standard message even if a request was already sent.
+                return $this->json([], Response::HTTP_OK);
             }
 
             $email = (new TemplatedEmail())
@@ -70,20 +70,12 @@ class ResetPasswordController extends AbstractController
                 ]);
 
             $mailer->send($email);
-        } else {
+            /* } else {
             // Generate a fake token if the user does not exist or someone hit this page directly.
             // This prevents exposing whether or not a user was found with the given email address or not
-            $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
+            $resetToken = $this->resetPasswordHelper->generateFakeResetToken(); */
         }
-
-        return $this->json(
-            [
-                'message' => 'Un email de réinitialisation de mot de passe a été envoyé à l\'adresse indiquée.',
-                // Token to be stored in the frontend to be able to reset the password
-                'resetToken' => $resetToken
-            ],
-            Response::HTTP_OK
-        );
+        return $this->json([], Response::HTTP_OK);
     }
 
     /**

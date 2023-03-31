@@ -28,7 +28,7 @@
         <br>
         <h1>Réinitialisation de votre mot de passe</h1>
         <p>Afin de réinitialiser votre mot de passe, veuillez suivre le lien ci-dessous :</p>
-        <a href="https://eco-friendly.fr/mot-de-passe{{ resetToken.token }}">Réinitialiser mon mot de passe</a>
+        <a href="https://eco-friendly.fr/mot-de-passe/{{ resetToken.token }}">Réinitialiser mon mot de passe</a>
         <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
         <p>A tout de suite,</p>
         <p>L'équipe d'Eco-Friendly</p>
