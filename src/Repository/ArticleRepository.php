@@ -163,11 +163,13 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         if ($search) {
-            $qb->andWhere('ar.content LIKE :search')->setParameter('search', "%$search%");
+            $qb->andWhere('ar.content LIKE :search OR ar.title LIKE :search')
+                ->setParameter('search', "%$search%");
         }
 
         if ($status) {
-            $qb->andWhere('ar.status = :status')->setParameter('status', $status);
+            $qb->andWhere('ar.status = :status')
+                ->setParameter('status', $status);
         }
 
         $qb->orderBy('ar.' . $sortType, $order);

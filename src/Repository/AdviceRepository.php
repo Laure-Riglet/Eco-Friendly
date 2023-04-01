@@ -169,11 +169,13 @@ class AdviceRepository extends ServiceEntityRepository
         }
 
         if ($search) {
-            $qb->andWhere('ad.content LIKE :search')->setParameter('search', "%$search%");
+            $qb->andWhere('ad.content LIKE :search OR ad.title LIKE :search')
+                ->setParameter('search', "%$search%");
         }
 
         if ($status) {
-            $qb->andWhere('ad.status = :status')->setParameter('status', $status);
+            $qb->andWhere('ad.status = :status')
+                ->setParameter('status', $status);
         }
 
         $qb->orderBy('ad.' . $sortType, $order);
