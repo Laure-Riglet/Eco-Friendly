@@ -48,10 +48,16 @@ class AdviceController extends AbstractController
     /**
      * @Route("/v2/advices", name="api_advices_new", methods={"POST"})
      */
-    public function new(Request $request, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository): Response
-    {
+    public function new(
+        Request $request,
+        SluggerService $slugger,
+        SerializerInterface $serializer,
+        ValidatorInterface $validator,
+        AdviceRepository $adviceRepository
+    ): Response {
         try {
             $advice = $serializer->deserialize($request->getContent(), Advice::class, 'json');
+            $advice->setTitle(strip_tags($advice->getTitle()));
             $advice->setSlug($slugger->slugify($advice->getTitle()));
             $advice->setCreatedAt(new DateTimeImmutable());
 
@@ -134,6 +140,7 @@ class AdviceController extends AbstractController
                 'json',
                 ['object_to_populate' => $advice]
             );
+            $advice->setTitle(strip_tags($advice->getTitle()));
             $advice->setSlug($slugger->slugify($advice->getTitle()));
             $advice->setUpdatedAt(new DateTimeImmutable());
 

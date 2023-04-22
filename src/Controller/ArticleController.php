@@ -10,6 +10,8 @@ use App\Repository\ArticleRepository;
 use App\Service\SluggerService;
 use DateTime;
 use DateTimeImmutable;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -89,7 +91,14 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $article->setTitle(strip_tags($article->getTitle()));
             $article->setSlug($slugger->slugify($article->getTitle()));
+
+            // Sanitize the content
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', 'p,br,b,strong,i[class],em,u,ul,ol,li,blockquote,hr,a[href],img[src|alt],h1,h2,h3,h4,h5,h6');
+            $purifier = new HTMLPurifier($config);
+            $article->setContent($purifier->purify($article->getContent()));
 
             $pictureFile = $form->get('pictureFile')->getData();
 
@@ -200,8 +209,17 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setTitle(strip_tags($article->getTitle()));
             $article->setSlug($slugger->slugify($article->getTitle()));
+
             $article->setUpdatedAt(new DateTimeImmutable());
+
+            // Sanitize the content
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', 'p,br,b,strong,i[class],em,u,ul,ol,li,blockquote,hr,a[href],img[src|alt],h1,h2,h3,h4,h5,h6');
+            $purifier = new HTMLPurifier($config);
+            $article->setContent($purifier->purify($article->getContent()));
 
             $pictureFile = $form->get('pictureFile')->getData();
             if ($pictureFile) {

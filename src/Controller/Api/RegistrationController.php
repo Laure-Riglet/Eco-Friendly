@@ -53,6 +53,7 @@ class RegistrationController extends AbstractController
             // Ensure that first name & last name are capitalized
             $user->setFirstName(ucfirst($user->getFirstName()));
             $user->setLastName(ucfirst($user->getLastName()));
+            $user->setNickname(strip_tags($user->getNickname()));
 
             $user->setCode($generator->codeGen());
             $user->setRoles(['ROLE_USER']);

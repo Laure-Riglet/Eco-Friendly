@@ -128,6 +128,8 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user->setNickname(strip_tags($user->getNickname()));
+
             $user->setPassword($passwordHasher->hashPassword($user, $tempPassword));
 
             $avatarFile = $form->get('avatarFile')->getData();
@@ -232,6 +234,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setFirstName(ucfirst($user->getFirstName()));
             $user->setLastName(ucfirst($user->getLastName()));
+            $user->setNickname(strip_tags($user->getNickname()));
 
             $password = $form->get('new_password')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $password));
@@ -372,7 +375,7 @@ class UserController extends AbstractController
 
             empty($user->getFirstname()) ? $user->setFirstname($originalUser->getFirstname()) : $user->setFirstname($user->getFirstname());
             empty($user->getLastname()) ? $user->setLastname($originalUser->getLastname()) : $user->setLastname($user->getLastname());
-            empty($user->getNickname()) ? $user->setNickname($originalUser->getNickname()) : $user->setNickname($user->getNickname());
+            empty($user->getNickname()) ? $user->setNickname($originalUser->getNickname()) : $user->setNickname(strip_tags($user->getNickname()));
             empty($user->getEmail()) ? $user->setEmail($originalUser->getEmail()) : $user->setEmail($user->getEmail());
 
             $user->setUpdatedAt(new DateTimeImmutable());
