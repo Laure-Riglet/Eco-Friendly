@@ -1,12 +1,25 @@
     <div class="d-flex justify-content-start align-items-center mb-1">	
         <span data-bs-toggle="tooltip" data-bs-placement="top" title="Filtrer">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <button 
+                class="btn btn-primary" 
+                type="button" 
+                data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasScrolling" 
+                aria-controls="offcanvasScrolling"
+            >
                 <i class="bi bi-funnel"></i>
             </button>
         </span>
     </div>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div 
+        class="offcanvas offcanvas-end" 
+        data-bs-scroll="true" 
+        data-bs-backdrop="false" 
+        tabindex="-1" 
+        id="offcanvasScrolling" 
+        aria-labelledby="offcanvasScrollingLabel"
+    >
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Filtrer et trier la liste</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -23,3 +36,6 @@
             {{ form_end(form) }}
         </div>
     </div>
+
+
+    

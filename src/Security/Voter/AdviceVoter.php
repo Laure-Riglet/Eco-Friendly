@@ -81,7 +81,8 @@ class AdviceVoter extends Voter
      */
     private function canEdit(Advice $advice, User $user)
     {
-        return ($user === $advice->getContributor() && $advice->getStatus() !== 2) || $this->security->isGranted('ROLE_ADMIN');
+        return ($user === $advice->getContributor() && $advice->getStatus() !== 2)
+            || $this->security->isGranted('ROLE_ADMIN');
     }
 
     /**

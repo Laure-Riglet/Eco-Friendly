@@ -7,6 +7,8 @@ use App\Repository\AdviceRepository;
 use App\Repository\CategoryRepository;
 use App\Service\SluggerService;
 use DateTimeImmutable;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,6 +54,12 @@ class AdviceController extends AbstractController
             $advice = $serializer->deserialize($request->getContent(), Advice::class, 'json');
             $advice->setSlug($slugger->slugify($advice->getTitle()));
             $advice->setCreatedAt(new DateTimeImmutable());
+
+            // Sanitize content, only allow tags in the list without attributes
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', 'p,ul,ol,li,strong,em,br');
+            $purifier = new HTMLPurifier($config);
+            $advice->setContent($purifier->purify($advice->getContent()));
 
             // Change of owning contributor has to be prevented
             $advice->setContributor($this->getUser());
@@ -108,14 +116,33 @@ class AdviceController extends AbstractController
     /**
      * @Route("/v2/advices/{id}", name="api_advices_update", requirements={"id":"\d+"}, methods={"PUT"})
      */
-    public function update(Request $request, ?Advice $advice, SluggerService $slugger, SerializerInterface $serializer, ValidatorInterface $validator, AdviceRepository $adviceRepository, CategoryRepository $categoryRepository): Response
-    {
+    public function update(
+        Request $request,
+        ?Advice $advice,
+        SluggerService $slugger,
+        SerializerInterface $serializer,
+        ValidatorInterface $validator,
+        AdviceRepository $adviceRepository
+    ): Response {
+
         $this->denyAccessUnlessGranted('advice_edit', $advice);
 
         try {
-            $advice = $serializer->deserialize($request->getContent(), Advice::class, 'json', ['object_to_populate' => $advice]);
+            $advice = $serializer->deserialize(
+                $request->getContent(),
+                Advice::class,
+                'json',
+                ['object_to_populate' => $advice]
+            );
             $advice->setSlug($slugger->slugify($advice->getTitle()));
             $advice->setUpdatedAt(new DateTimeImmutable());
+
+            // Sanitize content, only allow tags in the list without attributes
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', 'p,ul,ol,li,strong,em,br');
+            $purifier = new HTMLPurifier($config);
+            $advice->setContent($purifier->purify($advice->getContent()));
+
             // Change of owning contributor has to be prevented
             $advice->setContributor($this->getUser());
         } catch (NotEncodableValueException $e) {

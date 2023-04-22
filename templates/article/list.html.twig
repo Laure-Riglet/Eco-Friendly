@@ -48,7 +48,13 @@
                     <td>{{ article.title }}</td>
                     <td>{{ article.content|slice(0, 100)|striptags }} [...]</td>
                     <td>{{ article.author.firstname }} {{ article.author.lastname }}</td>
-                    <td class="text-center"><img src="{{ article.picture }}" alt="{{ article.slug }}" style="max-width: 80px; max-height: 80px;" /></td>
+                    <td class="text-center">
+                        <img 
+                            src="{{ article.picture }}" 
+                            alt="{{ article.slug }}" 
+                            style="max-width: 80px; max-height: 80px;" 
+                        />
+                    </td>
                     <td class="text-center">{{ article.category.name }}</td>
                     <td class="text-center">
                         {% include "_fragments/_content_status_tag.html.twig" with {status:article.status} %}
@@ -56,11 +62,27 @@
                     <td>{{ article.createdAt|date('d-m-Y H:i:s') }}</td>
                     <td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
                     <td class="d-flex flex-nowrap justify-content-center">
-                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_articles_show', {'id': article.id}) }}"><i class="bi bi-eye"></i></a>
+                        <a 
+                            class="m-1 btn-sm btn btn-success" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="Voir" 
+                            href="{{ path('bo_articles_show', {'id': article.id}) }}"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </a>
                         {% if not article.status is same as 2 or is_granted('ROLE_ADMIN') %}
-                        <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_articles_edit', {'id': article.id}) }}"><i class="bi bi-pencil"></i></a>                       
+                        <a 
+                            class="m-1 btn-sm btn btn-warning" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="&Eacute;diter" 
+                            href="{{ path('bo_articles_edit', {'id': article.id}) }}"
+                        >
+                            <i class="bi bi-pencil"></i>
+                        </a>                       
                         {% endif %}
-            {% include "_fragments/_button_activate_article.html.twig" %}
+                    {% include "_fragments/_button_activate_article.html.twig" %}
                     </td>
                 </tr>
             {% else %}

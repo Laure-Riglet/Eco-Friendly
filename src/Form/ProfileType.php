@@ -22,50 +22,56 @@ class ProfileType extends AbstractType
         $builder
             ->add("firstname", TextType::class, [
                 "required" => true,
-                "label" => "Prénom",
+                "label" => "Prénom *",
                 "attr" => [
                     "placeholder" => "Entrez votre prénom"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add("lastname", TextType::class, [
                 "required" => true,
-                "label" => "Nom",
+                "label" => "Nom *",
                 "attr" => [
                     "placeholder" => "Entrez votre nom de famille"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add("nickname", TextType::class, [
                 "required" => true,
-                "label" => 'Pseudo',
+                "label" => 'Pseudo *',
                 "attr" => [
                     "placeholder" => "Entrez votre pseudo"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add('new_password', PasswordType::class, [
                 "mapped" => false,
-                "label" => "Nouveau mot de passe",
+                "label" => "Nouveau mot de passe *",
                 "attr" => [
                     "placeholder" => "Mot de passe"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add('confirm_password', PasswordType::class, [
-                "label" => "Confirmation du mot de passe",
+                "label" => "Confirmation du mot de passe *",
                 "mapped" => false,
                 "attr" => [
                     "placeholder" => "Confirmation du mot de passe"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add('email', EmailType::class, [
                 "required" => true,
-                "label" => "Email",
+                "label" => "Email *",
                 "attr" => [
                     "placeholder" => "Email"
-                ]
+                ],
+                'help' => '* obligatoire',
             ])
 
             ->add('avatarFile', FileType::class, [

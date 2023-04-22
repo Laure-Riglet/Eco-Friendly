@@ -35,8 +35,24 @@
                     <td>{{ category.createdAt|date('d-m-Y H:i:s') }}</td>
                     <td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
                     <td class="d-flex flex-nowrap justify-content-center">
-                        <a class="m-1 btn-sm btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Voir" href="{{ path('bo_categories_show', {'id': category.id}) }}"><i class="bi bi-eye"></i></a>
-                        <a class="m-1 btn-sm btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="&Eacute;diter" href="{{ path('bo_categories_edit', {'id': category.id}) }}"><i class="bi bi-pencil"></i></a>
+                        <a 
+                            class="m-1 btn-sm btn btn-success" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="Voir" 
+                            href="{{ path('bo_categories_show', {'id': category.id}) }}"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a 
+                            class="m-1 btn-sm btn btn-warning" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="&Eacute;diter" 
+                            href="{{ path('bo_categories_edit', {'id': category.id}) }}"
+                        >
+                            <i class="bi bi-pencil"></i>
+                        </a>
                     {% include "_fragments/_button_activate_category.html.twig"%}
                     </td>
                 </tr>
